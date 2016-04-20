@@ -1,3 +1,6 @@
+import { Template } from 'meteor/templating';
+import { $ } from 'meteor/jquery';
+
 import './group_new_card.html';
 import './group_new_card.css';
 
