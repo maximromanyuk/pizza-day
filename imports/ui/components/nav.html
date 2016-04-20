@@ -13,7 +13,7 @@
           <li class="{{isActiveRoute regex='invites'}}">
           <!-- Show counter only when user logged in -->
           {{#if currentUser}}
-            <span class='badge'>1</span>
+            <span class='badge'>{{invitesCounter}}</span>
           {{/if}} 
           <!-- -->
             <a href="{{pathFor 'invites'}}">Invites</a>
