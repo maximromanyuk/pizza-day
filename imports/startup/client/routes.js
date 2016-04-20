@@ -37,6 +37,19 @@ FlowRouter.route('/groups', {
   }
 });
 
+FlowRouter.route('/groups/:groupId', {
+  name: "groupPage",
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action: function(params, queryParams) {
+    alert(`Navigated to group with id: {params.groupId}`);
+    // BlazeLayout.render('masterLayout', {
+    //   footer: "footer",
+    //   main: "groupPage",
+    //   nav: "nav",
+    // });
+  }
+});
+
 FlowRouter.route('/invites', {
   name: "invites",
   triggersEnter: [AccountsTemplates.ensureSignedIn],
