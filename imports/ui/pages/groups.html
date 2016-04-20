@@ -1,0 +1,58 @@
+<template name="groups">
+	<h3 class="center">All Your groups here!</h3> 
+
+	<div class="row">
+		{{>group_new_card}}
+
+		{{>group_card}}
+		{{>group_card}}
+		{{>group_card}}
+		{{>group_card}}
+	</div>
+
+</template>
+
+
+<template name="group_card">
+
+		<div class="col s12 m4">
+			<div class="card small hoverable">
+				<div class="card-image waves-effect waves-block waves-light">
+					<a href="/groups/someGroup"><img src="imgs/gdg_logo.jpg"></a>
+				</div>
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4 truncate">GDG Group
+					  <i class="material-icons right">more_vert</i>
+					</span>
+				</div>
+				<div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">GDG Group
+					  <i class="material-icons right">close</i>
+					</span>
+					<p>Here add some useful info about group. Later.</p>
+				</div>
+			</div>
+		</div>
+
+</template>
+
+<template name="group_new_card">
+
+		<div class="col s12 m4">
+			<div class="card small">
+				<div class="card-image waves-effect waves-block waves-light">
+					<img class="activator" src="imgs/new-item.jpg">
+				</div>
+				<div class="card-content">
+					<div class="input-field col s12">
+					  <form class="create_group">
+					    <i class="material-icons prefix">group</i>
+				        <input id="group_name" name="group_name" type="text" class="validate">
+				        <label for="group_name">Group name</label>
+				      </form>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+</template>

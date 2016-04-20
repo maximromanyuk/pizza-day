@@ -27,3 +27,5 @@ useraccounts:materialize
 zimme:active-route
 accounts-password
 accounts-google
+useraccounts:core
+fortawesome:fontawesome

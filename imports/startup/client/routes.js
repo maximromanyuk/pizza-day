@@ -1,3 +1,18 @@
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { AccountsTemplates } from 'meteor/useraccounts:core';
+
+// Import to load these templates
+import '../../ui/layouts/master_layout.js';
+import '../../ui/components/nav.js';
+import '../../ui/components/footer.js';
+import '../../ui/pages/page_not_found.js';
+
+import '../../ui/stylesheets/style.css';
+
+import '../../ui/pages/home.js';
+import '../../ui/pages/groups.js';
+import '../../ui/pages/invites.js';
 
 FlowRouter.route('/', {
   name: "home",

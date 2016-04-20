@@ -1,5 +1,5 @@
 // Configure accounts-ui or AccountsTemplates(in future)
-import './accounts-configuration.js';
+import './at-config.js';
 
 // Set up routes
 import './routes.js';
