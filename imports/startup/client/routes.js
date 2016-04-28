@@ -12,6 +12,7 @@ import '../../ui/stylesheets/style.css';
 
 import '../../ui/pages/home.js';
 import '../../ui/pages/groups.js';
+import '../../ui/pages/group_page.js';
 import '../../ui/pages/invites.js';
 
 FlowRouter.route('/', {
@@ -37,16 +38,27 @@ FlowRouter.route('/groups', {
   }
 });
 
-FlowRouter.route('/groups/:groupId', {
-  name: "groupPage",
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
+// FlowRouter.route('/groups/:groupId', {
+//   name: "groupPage",
+//   triggersEnter: [AccountsTemplates.ensureSignedIn],
+//   action: function(params, queryParams) {
+//     alert(`Navigated to group with id: {params.groupId}`);
+//     // BlazeLayout.render('masterLayout', {
+//     //   footer: "footer",
+//     //   main: "groupPage",
+//     //   nav: "nav",
+//     // });
+//   }
+// });
+
+FlowRouter.route('/groupsTemp', {
+  name: 'temporaryRoute',
   action: function(params, queryParams) {
-    alert(`Navigated to group with id: {params.groupId}`);
-    // BlazeLayout.render('masterLayout', {
-    //   footer: "footer",
-    //   main: "groupPage",
-    //   nav: "nav",
-    // });
+    BlazeLayout.render('masterLayout', {
+      footer: "footer",
+      main: "group_page",
+      nav: "nav",
+    });
   }
 });
 
