@@ -1,0 +1,27 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'lint' ]
+2 info using npm@2.14.22
+3 info using node@v0.10.43
+4 verbose stack Error: missing script: lint
+4 verbose stack     at run (/home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/lib/run-script.js:142:19)
+4 verbose stack     at /home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/lib/run-script.js:58:5
+4 verbose stack     at /home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:345:5
+4 verbose stack     at checkBinReferences_ (/home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:309:45)
+4 verbose stack     at final (/home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:343:3)
+4 verbose stack     at then (/home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:113:5)
+4 verbose stack     at /home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:300:12
+4 verbose stack     at /home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+4 verbose stack     at fs.js:272:14
+4 verbose stack     at /home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:43:10
+5 verbose cwd /home/candyogre/Projects/pizza-day
+6 error Linux 4.4.0-22-generic
+7 error argv "node" "/home/candyogre/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm" "run" "lint"
+8 error node v0.10.43
+9 error npm  v2.14.22
+10 error missing script: lint
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
