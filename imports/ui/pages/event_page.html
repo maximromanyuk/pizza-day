@@ -1,0 +1,60 @@
+<template name="eventPage">
+  <h3 class="center">Event management</h3> 
+
+  <div class="row">
+
+<!-- Button -->
+<!-- <div class="col s12 m3">
+      <a class="waves-effect waves-light btn-large">
+        Create new event
+      </a>
+    </div> -->
+
+<!-- Datepicker & button-dropdown -->
+    <div class="col s12 m3">
+      
+      <p>Date</p>
+      <input placeholder="Pick a date" type="date" class="datepicker" id="date">
+
+      <!--Dropdown Trigger -->
+      <a class='dropdown-button btn tooltipped' data-position="right" data-delay="50" data-tooltip="Click to change order status" data-activates='dropdown1'>
+        Status: ordering
+      </a> 
+
+      <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">ordering</a></li>
+        <li><a href="#!">ordered</a></li>
+        <li><a href="#!">delivering</a></li>
+        <li><a href="#!">delivered</a></li>
+      </ul>
+
+    </div> 
+<!-- /Datepicker & button-dropdown -->    
+
+<!-- Users list with status -->
+    <div class="col s12 m9"> 
+
+      <ul class="collection with-header">
+        <li class="collection-header center"><h4>Users status</h4></li>
+        <li class="collection-item avatar">
+          <i class="material-icons circle">perm_identity</i>
+          <span class="title">Maksim Romanyuk</span>
+          <a href="#!" class="secondary-content">
+            <a class="waves-effect waves-light btn right green accent-4">confirmed</a>
+          </a>
+        </li>
+        <li class="collection-item avatar">
+          <i class="material-icons circle">perm_identity</i>
+          <span class="title">Tyran Sergiy</span>
+          <a href="#!" class="secondary-content">
+            <a class="waves-effect waves-light btn right red accent-4">discarded</a>
+          </a>
+        </li>
+      </ul>
+
+    </div> 
+<!-- /Users list with status -->
+  </div> <!-- /row -->
+</template>
+

@@ -13,6 +13,7 @@ import '../../ui/stylesheets/style.css';
 import '../../ui/pages/home.js';
 import '../../ui/pages/groups.js';
 import '../../ui/pages/group_page.js';
+import '../../ui/pages/event_page.js';
 import '../../ui/pages/invites.js';
 
 FlowRouter.route('/', {
@@ -57,6 +58,17 @@ FlowRouter.route('/groupsTemp', {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "group_page",
+      nav: "nav",
+    });
+  }
+});
+
+FlowRouter.route('/eventPageTemp', {
+  name: 'temporaryRoute2',
+  action: function(params, queryParams) {
+    BlazeLayout.render('masterLayout', {
+      footer: "footer",
+      main: "eventPage",
       nav: "nav",
     });
   }

@@ -15,4 +15,7 @@ Template.invite_card.helpers({
 
 Template.invite_card.events({
 	// TODO: catch clicks on Accept and Decline links
+	'click #acceptInv'() {
+		Materialize.toast('Invitation accepted!', 4000)
+	},
 });
