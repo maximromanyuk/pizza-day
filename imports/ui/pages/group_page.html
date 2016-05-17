@@ -1,27 +1,69 @@
 <template name="group_page">
-  <h3 class="center">Group menu</h3> 
+  <div class="center">
+    <h3>"Pizza Day": 17-05-2016</h3>
+    <h5>Status: <span class="orange-text">ordering</span></h5> 
+    <a href="{{pathFor 'temporaryRoute2'}}" class="waves-effect waves-light btn orange">Event Management</a>
+  </div>
 
   <div class="row">
 
-  <div class="col s12 m5">
-        <div class="card">
-          <div class="card-image">
-            <img src="imgs/gdg_logo.jpg" class="responsive-img" style="max-width:100%; height:270px">
+    <!-- Menu -->
+    <div class="col s12 m6">
 
+      <ul class="collection with-header">
+        <li class="collection-header center"><h4>Menu</h4></li>
+        <!-- Form for adding new item to menu -->
+        <li class="collection-item red lighten-5">
+          <div class="row">
+            <div class="input-field col s5">
+              <input placeholder="Item name" id="first_name" type="text" class="validate">
+            </div>
+            <div class="input-field col s3">
+              <input placeholder="Price" id="last_name" type="number" class="validate">
+            </div>
+            <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">add</i></a>
           </div>
-          <div class="card-content">
-           <span class="card-title">Dog`s group</span>
-           <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
-          </div>
-          <div class="card-action">
-            <a href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 100%;" data-upgraded=",MaterialButton,MaterialRipple">Leave group
-            <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
-          </div>
-        </div>
-      </div>
+        </li> <!-- /form -->
 
-  </div>
+        <!-- Menu item -->
+        <li class="collection-item">
+          <div class="row">
+            Pizza with chicken (75 UAN)
+            <a class="btn-floating btn waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <!-- <a class="btn disabled">1 free!</a> -->
+            <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+            <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">mode_edit</i></a>
+          </div>
+        </li> <!-- /Menu item -->
+
+      </ul> <!-- /.collection -->
+
+    </div> <!-- /Menu -->
+
+    <!-- Users -->
+    <div class="col s12 m6">
+
+      <ul class="collection with-header">
+        <li class="collection-header center"><h4>Users</h4></li>
+        <!-- User item -->
+        <li class="collection-item avatar">
+          <i class="material-icons circle">perm_identity</i>
+          <span class="title">Maksim Romanyuk</span>
+          <a href="#!" class="secondary-content">
+            <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">remove</i></a>
+          </a>
+        </li> <!-- /User item -->
+
+        <!-- Button for adding new usr -->
+        <li class="collection-item center-align">
+          <a class="waves-effect waves-light btn">Add new participant</a>
+        </li> <!-- /btn -->
+
+      </ul> <!-- /.collection -->
+
+    </div> <!-- /Users -->
+
+  </div> <!-- /row -->
 
 
 </template>
