@@ -2,18 +2,30 @@
 
 		<div class="col s12 m4">
 			<div class="card small">
-				<div class="card-image cust-image waves-effect waves-block waves-light">
+				<!-- <div class="card-image cust-image waves-effect waves-block waves-light">
 					<img class="activator" src="imgs/new-item.jpg">
-				</div>
-				<div class="card-content">
+				</div> -->
+				<form class="createGroup">
+				  <div class="card-content">
 					<div class="input-field cust-input col s12">
-					  <form class="create_group">
 					    <i class="material-icons prefix">group</i>
 				        <input id="group_name" name="group_name" type="text" class="validate">
 				        <label for="group_name">Group name</label>
-				      </form>
 				    </div>
-				</div>
+				    <div class="input-field cust-input col s12">
+					    <i class="material-icons prefix">language</i>
+				        <input id="logo_url" name="logo_url" type="text" class="validate">
+				        <label for="logo_url">Image URL</label>
+				    </div>
+				  </div>
+				  <div class="card-action">
+				      <!-- <a class="waves-effect waves-light btn">button</a> -->
+				    <button class="btn waves-effect waves-light right" type="submit" name="action">
+				  	  Create
+    			      <i class="material-icons right">send</i>
+  				    </button>
+				  </div>
+				</form>
 			</div>
 		</div>
 
