@@ -1,0 +1,29 @@
+<template name="menu">
+  <div class="col s12 m6">
+    <ul class="collection with-header">
+      <li class="collection-header center"><h4>Menu</h4></li>
+      <!-- Form for adding new item to menu -->
+      <li class="collection-item red lighten-5">
+        <div class="row">
+          <div class="input-field col s5">
+            <input placeholder="Item name" id="first_name" type="text" class="validate">
+          </div>
+          <div class="input-field col s3">
+            <input placeholder="Price" id="last_name" type="number" class="validate">
+          </div>
+          <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">add</i></a>
+        </div>
+      </li> <!-- /form -->
+      <!-- Menu item -->
+      <li class="collection-item">
+        <div class="row">
+          Pizza with chicken (75 UAN)
+          <a class="btn-floating btn waves-effect waves-light red"><i class="material-icons">add</i></a>
+          <!-- <a class="btn disabled">1 free!</a> -->
+          <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+          <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">mode_edit</i></a>
+        </div>
+      </li> <!-- /Menu item -->
+    </ul> <!-- /.collection -->
+  </div>
+</template>
