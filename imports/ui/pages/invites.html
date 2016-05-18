@@ -2,6 +2,8 @@
   	<h3 class="center">This is Invites stuff!</h3>
 
 	<div class="row">
-		{{>invite_card}}
+		{{#each invites}}
+		  {{> invite_card}}
+		{{/each}}
 	</div>
 </template>
