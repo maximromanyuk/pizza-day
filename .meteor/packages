@@ -22,10 +22,8 @@ kadira:blaze-layout
 arillo:flow-router-helpers
 materialize:materialize
 softwarerero:accounts-t9n
-useraccounts:flow-routing
-useraccounts:materialize
 zimme:active-route
-accounts-password
 accounts-google
-useraccounts:core
 fortawesome:fontawesome
+accounts-ui-unstyled
+less
