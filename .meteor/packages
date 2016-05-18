@@ -23,6 +23,6 @@ arillo:flow-router-helpers
 materialize:materialize
 softwarerero:accounts-t9n
 zimme:active-route
-accounts-password
 accounts-google
 fortawesome:fontawesome
+accounts-ui

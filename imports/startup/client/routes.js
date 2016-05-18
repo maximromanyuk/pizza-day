@@ -1,6 +1,5 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
-import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 // Import to load these templates
 import '../../ui/layouts/master_layout.js';
@@ -29,7 +28,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/groups', {
   name: "groups",
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  // triggersEnter: [AccountsTemplates.ensureSignedIn],
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
@@ -76,7 +75,7 @@ FlowRouter.route('/eventPageTemp', {
 
 FlowRouter.route('/invites', {
   name: "invites",
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  // triggersEnter: [AccountsTemplates.ensureSignedIn],
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
@@ -96,9 +95,9 @@ FlowRouter.notFound = {
   }
 };
 
-AccountsTemplates.configureRoute('changePwd');
-AccountsTemplates.configureRoute('forgotPwd');
-AccountsTemplates.configureRoute('resetPwd');
-AccountsTemplates.configureRoute('signIn');
-AccountsTemplates.configureRoute('signUp');
-AccountsTemplates.configureRoute('verifyEmail');
+// AccountsTemplates.configureRoute('changePwd');
+// AccountsTemplates.configureRoute('forgotPwd');
+// AccountsTemplates.configureRoute('resetPwd');
+// AccountsTemplates.configureRoute('signIn');
+// AccountsTemplates.configureRoute('signUp');
+// AccountsTemplates.configureRoute('verifyEmail');
