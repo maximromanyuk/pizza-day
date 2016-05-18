@@ -1,7 +1,6 @@
 accounts-base@1.2.7
 accounts-google@1.0.9
 accounts-oauth@1.1.12
-accounts-ui@1.1.9
 accounts-ui-unstyled@1.1.12
 allow-deny@1.0.4
 arillo:flow-router-helpers@0.5.1
