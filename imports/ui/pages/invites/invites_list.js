@@ -1,15 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-import './invites.html';
+import { Invites } from '../../../api/invites/invites.js';
 
-import './cards/invite_card.js';
+import './invites_list.html';
 
-Template.invites.onCreated(function invitesOnCreated() {
+import './invite_card.js';
+
+Template.invitesList.onCreated(function invitesListOnCreated() {
 	Meteor.subscribe('invites');
 });
 
-Template.invites.helpers({
+Template.invitesList.helpers({
 	invites() {
 		//TODO
 		// return Invites.find();

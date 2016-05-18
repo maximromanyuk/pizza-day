@@ -4,11 +4,11 @@ import { $ } from 'meteor/jquery';
 import './invite_card.html';
 import './invite_card.css';
 
-Template.invite_card.helpers({
+Template.inviteCard.helpers({
 	
 });
 
-Template.invite_card.events({
+Template.inviteCard.events({
 	'click #acceptInv'() {
 		Materialize.toast('Invitation accepted!', 4000)
 	},

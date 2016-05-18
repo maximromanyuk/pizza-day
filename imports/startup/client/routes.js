@@ -2,18 +2,19 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 // Import to load these templates
+import '../../ui/stylesheets/style.css';
+
 import '../../ui/layouts/master_layout.js';
+import '../../ui/pages/home.js';
 import '../../ui/components/nav.js';
 import '../../ui/components/footer.js';
 import '../../ui/pages/page_not_found.js';
 
-import '../../ui/stylesheets/style.css';
+import '../../ui/pages/groups/groups_list.js';
+import '../../ui/pages/invites/invites_list.js';
 
-import '../../ui/pages/home.js';
-import '../../ui/pages/groups.js';
 import '../../ui/pages/group_page.js';
 import '../../ui/pages/event_page.js';
-import '../../ui/pages/invites.js';
 
 FlowRouter.route('/', {
   name: "home",
@@ -31,7 +32,18 @@ FlowRouter.route('/groups', {
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
-      main: "groups",
+      main: "groupsList",
+      nav: "nav",
+    });
+  }
+});
+
+FlowRouter.route('/invites', {
+  name: "invites",
+  action: function(params, queryParams) {
+    BlazeLayout.render('masterLayout', {
+      footer: "footer",
+      main: "invitesList",
       nav: "nav",
     });
   }
@@ -43,7 +55,7 @@ FlowRouter.route('/groups', {
 //     alert(`Navigated to group with id: {params.groupId}`);
 //     // BlazeLayout.render('masterLayout', {
 //     //   footer: "footer",
-//     //   main: "groupPage",
+//     //   main: "group_page",
 //     //   nav: "nav",
 //     // });
 //   }
@@ -54,7 +66,7 @@ FlowRouter.route('/groupsTemp', {
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
-      main: "group_page",
+      main: "groupPage",
       nav: "nav",
     });
   }
@@ -66,17 +78,6 @@ FlowRouter.route('/eventPageTemp', {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "eventPage",
-      nav: "nav",
-    });
-  }
-});
-
-FlowRouter.route('/invites', {
-  name: "invites",
-  action: function(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "invites",
       nav: "nav",
     });
   }

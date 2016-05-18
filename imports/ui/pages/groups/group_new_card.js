@@ -4,7 +4,7 @@ import { $ } from 'meteor/jquery';
 import './group_new_card.html';
 import './group_new_card.css';
 
-Template.group_new_card.events({
+Template.groupNewCard.events({
 	'submit .create_group': function(e) {
 		e.preventDefault();
 

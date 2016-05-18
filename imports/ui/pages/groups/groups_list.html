@@ -1,11 +1,11 @@
-<template name="groups">
+<template name="groupsList">
 	<h3 class="center">All Your groups here!</h3> 
 
 	<div class="row">
-		{{>group_new_card}}
+		{{>groupNewCard}}
 
 		{{#each groups}}
-		  {{> group_card}}
+		  {{> groupCard}}
 		{{/each}}
 	</div>
 </template>
