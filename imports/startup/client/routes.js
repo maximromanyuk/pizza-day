@@ -38,6 +38,17 @@ FlowRouter.route('/groups', {
   }
 });
 
+FlowRouter.route('/groups/:groupId', {
+  name: "groupPage",
+  action: function(params, queryParams) {
+    BlazeLayout.render('masterLayout', {
+      footer: "footer",
+      main: "groupPage",
+      nav: "nav",
+    });
+  }
+});
+
 FlowRouter.route('/invites', {
   name: "invites",
   action: function(params, queryParams) {
@@ -49,17 +60,6 @@ FlowRouter.route('/invites', {
   }
 });
 
-// FlowRouter.route('/groups/:groupId', {
-//   name: "groupPage",
-//   action: function(params, queryParams) {
-//     alert(`Navigated to group with id: {params.groupId}`);
-//     // BlazeLayout.render('masterLayout', {
-//     //   footer: "footer",
-//     //   main: "group_page",
-//     //   nav: "nav",
-//     // });
-//   }
-// });
 
 FlowRouter.route('/groupsTemp', {
   name: 'temporaryRoute',
