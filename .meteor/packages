@@ -29,3 +29,5 @@ accounts-ui-unstyled
 less
 check
 msavin:mongol
+aldeed:simple-schema
+mdg:validated-method
