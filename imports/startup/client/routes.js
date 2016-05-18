@@ -28,7 +28,6 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/groups', {
   name: "groups",
-  // triggersEnter: [AccountsTemplates.ensureSignedIn],
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
@@ -40,7 +39,6 @@ FlowRouter.route('/groups', {
 
 // FlowRouter.route('/groups/:groupId', {
 //   name: "groupPage",
-//   triggersEnter: [AccountsTemplates.ensureSignedIn],
 //   action: function(params, queryParams) {
 //     alert(`Navigated to group with id: {params.groupId}`);
 //     // BlazeLayout.render('masterLayout', {
@@ -75,7 +73,6 @@ FlowRouter.route('/eventPageTemp', {
 
 FlowRouter.route('/invites', {
   name: "invites",
-  // triggersEnter: [AccountsTemplates.ensureSignedIn],
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
@@ -94,10 +91,3 @@ FlowRouter.notFound = {
     });
   }
 };
-
-// AccountsTemplates.configureRoute('changePwd');
-// AccountsTemplates.configureRoute('forgotPwd');
-// AccountsTemplates.configureRoute('resetPwd');
-// AccountsTemplates.configureRoute('signIn');
-// AccountsTemplates.configureRoute('signUp');
-// AccountsTemplates.configureRoute('verifyEmail');

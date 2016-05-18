@@ -64,3 +64,23 @@ footer {
     width: 98%;
   }
 }
+
+/* Styling login buton */
+.login-buttons-with-only-one-button {
+    text-decoration: none;
+    color: #fff;
+    background-color: #26a69a;
+    text-align: center;
+    /*letter-spacing: .5px;*/
+    transition: .2s ease-out;
+    cursor: pointer;
+    /*border: none;*/
+    /*border-radius: 2px;*/
+    display: inline-block;
+    /*height: 36px;*/
+    line-height: 36px;
+    /*outline: 0;*/
+    padding: 0 2rem;
+    /*text-transform: uppercase;*/
+    background-color: #ff9800 !important;
+}
