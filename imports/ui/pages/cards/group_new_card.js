@@ -8,10 +8,13 @@ Template.group_new_card.events({
 	'submit .create_group': function(e) {
 		e.preventDefault();
 
-		let text = e.target.group_name.value;
-		alert(`Form confirmed! Group name: ${text}`);
+		let groupName = e.target.group_name.value;
+		Materialize.toast(`Group '${groupName}' created!`, 4000)
 		
 		e.target.group_name.value = '';
-		$('#group_name').prop('disabled', true);
+		// disable input after creating
+		// $('#group_name').prop('disabled', true);
+
+		Meteor.call('groups.insert', groupName);
 	},
 });

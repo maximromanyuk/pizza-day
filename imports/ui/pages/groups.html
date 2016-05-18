@@ -4,10 +4,8 @@
 	<div class="row">
 		{{>group_new_card}}
 
-		{{>group_card}}
-		{{>group_card}}
-		{{>group_card}}
-		{{>group_card}}
+		{{#each groups}}
+		  {{> group_card}}
+		{{/each}}
 	</div>
-
 </template>
