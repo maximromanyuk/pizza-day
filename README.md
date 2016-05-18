@@ -21,6 +21,8 @@ image/logo, menu items that can be ordered in this group (made for simplicity, s
 * Event creator receives same email as simple participants + event summary (list menu items he should order in “Local Restaurant”). After ordering event creator is able to change event status to delivering.
 * [OPTIONAL] Ability to add discount coupons for specific menu items.
 
+***
+[Hosted on Heroku](https://best-pizza-day-ever.herokuapp.com) [still in development]
 
 ***
 ##Technologies stack
