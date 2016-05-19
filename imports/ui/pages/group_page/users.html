@@ -8,12 +8,43 @@
       {{/each}}
 
       {{#if groupCreator}}
-      <!-- Button for adding new usr -->
       <li class="collection-item center-align">
-        <a class="waves-effect waves-light btn">Add new participant</a>
-      </li> <!-- /btn -->
+        <a class="waves-effect waves-light btn modal-trigger" id="addParticipant">Add new participant</a>
+      </li>
       {{/if}}
 
     </ul>
   </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Choose users to invite</h4>
+
+      <div class="row">
+      <form id="user-choose">
+        <div class="input-field col s12 m6">
+          <select id="user-select">
+            <option value="" disabled selected>Choose user</option>
+            {{#each usersList}}
+              <option value="{{_id}}">{{profile.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div class="col s12 m3">
+          <button class="btn waves-effect waves-light" id="sendInvite" type="submit" name="action">Send
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div> 
+
+
 </template>
