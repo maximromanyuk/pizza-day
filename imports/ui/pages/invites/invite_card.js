@@ -22,6 +22,12 @@ Template.inviteCard.events({
 		})
 	},
 	'click #declineInv'() {
-		Materialize.toast('Invitation declined.', 4000)
+		Meteor.call('invites.remove', this._id, (err, res) => {
+			if(err) {
+				console.log(err);
+			} else {
+				Materialize.toast('Invitation declined.', 4000);
+			}
+		});
 	},
 });
