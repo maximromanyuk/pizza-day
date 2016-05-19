@@ -15,15 +15,13 @@ Template.groupPage.onCreated(function groupPageOnCreated() {
 		const id = FlowRouter.getParam('groupId');
 		this.subscribe('group', id);
 	});
-	// Meteor.subscribe('group', id);
 });
 
-	Template.groupPage.helpers({
-		groupCreator() {
-			let id = FlowRouter.getParam('groupId');
-
-			if (!Groups.findOne(id)) return;
-			
-			return Groups.findOne().isGroupCreator(id);
-		}
-	});
+Template.groupPage.helpers({
+	groupCreator() {
+		let id = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(id)) return;
+		
+		return Groups.findOne().isGroupCreator(id);
+	}
+});
