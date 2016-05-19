@@ -21,8 +21,9 @@ Template.groupPage.onCreated(function groupPageOnCreated() {
 	Template.groupPage.helpers({
 		groupCreator() {
 			let id = FlowRouter.getParam('groupId');
+
 			if (!Groups.findOne(id)) return;
 			
-			return Meteor.userId() === Groups.findOne(id).creator;
+			return Groups.findOne().isGroupCreator(id);
 		}
 	});
