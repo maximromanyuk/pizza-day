@@ -6,3 +6,5 @@ import '../../api/groups/server/publications.js';
 
 import '../../api/invites/invites.js';
 import '../../api/invites/server/publications.js';
+
+import '../../api/users/server/publications.js';

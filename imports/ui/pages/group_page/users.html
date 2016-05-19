@@ -3,14 +3,9 @@
     <ul class="collection with-header">
 
       <li class="collection-header center"><h4>Users</h4></li>
-      <!-- User item -->
-      <li class="collection-item avatar">
-        <i class="material-icons circle">perm_identity</i>
-        <span class="title">Maksim Romanyuk</span>
-        <a href="#!" class="secondary-content">
-          <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">remove</i></a>
-        </a>
-      </li> <!-- /User item -->
+      {{#each usersList}}
+        {{> usersItem}}
+      {{/each}}
 
       {{#if groupCreator}}
       <!-- Button for adding new usr -->

@@ -1,0 +1,16 @@
+<template name="usersItem">
+      <li class="collection-item avatar">
+        <img src={{services.google.picture}} alt="" class="circle">
+        <span class="title">
+          {{profile.name}}
+          {{#if groupCreator}}
+            (creator)
+          {{/if}}
+        </span>
+        <a class="secondary-content">
+          {{#if groupCreator}}
+            <a class="btn-floating btn waves-effect waves-light red right"><i class="material-icons">remove</i></a>
+          {{/if}}
+        </a>
+      </li> 
+  </template>
