@@ -13,7 +13,7 @@ Template.users.onCreated(function usersOnCreated() {
 Template.users.helpers({
 	usersList() {
 		if(!Meteor.user()) return;
-		console.log(Meteor.users.findOne());
+		
 		return Meteor.users.find();
 	},
 
