@@ -34,6 +34,11 @@ Meteor.methods({
       },
   	});
   },
+
+  'groups.addUser'(groupId, invited) {
+    Groups.update({_id: groupId}, 
+                  { $push: { users: invited}});
+  },
 });
 
 Meteor.methods({

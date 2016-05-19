@@ -19,5 +19,13 @@ Meteor.methods({
   		groupName: group.name,
   		inviter: Meteor.user().profile.name
   	});
-  }
+  },
+
+  'invites.remove'(id) {
+    if(!Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Invites.remove(id);
+  },
 });
