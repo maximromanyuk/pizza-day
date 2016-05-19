@@ -80,3 +80,7 @@ FlowRouter.notFound = {
     });
   }
 };
+
+FlowRouter.subscriptions = function() {
+  this.register('invites', Meteor.subscribe('invites'));
+};
