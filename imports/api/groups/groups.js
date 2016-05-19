@@ -42,7 +42,8 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
 
-    Groups.update({_id: groupId}, { $push: { menuItems: {name: name, price: price}}})
+    Groups.update({_id: groupId}, 
+                  { $push: { menuItems: {name: name, price: price}}})
   },
 
   'menu.delete'(groupId, itemName) {
