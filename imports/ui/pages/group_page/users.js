@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { $ } from 'meteor/jquery';
+import { _ } from 'meteor/underscore';
 
 import { Groups } from '../../../api/groups/groups.js';
 import { Invites } from '../../../api/invites/invites.js';
@@ -21,6 +22,19 @@ Template.users.helpers({
 		if(!Meteor.user()) return;
 
 		return Meteor.users.find();
+	},
+	participantsList() {
+		let groupId = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(groupId)) return;
+
+		let users = Groups.findOne(groupId).users;
+
+		let fullUsers = [];
+		for(let i=0; i<users.length; i++) {
+			fullUsers.push(Meteor.users.findOne(users[i]));
+		}
+		
+		return fullUsers;
 	},
 
 	groupCreator() {
