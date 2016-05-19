@@ -18,7 +18,7 @@ import '../../ui/pages/event_page/event_page.js';
 
 FlowRouter.route('/', {
   name: "home",
-  action: function(params, queryParams) {
+  action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "home",
@@ -29,7 +29,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/groups', {
   name: "groups",
-  action: function(params, queryParams) {
+  action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "groupsList",
@@ -40,7 +40,7 @@ FlowRouter.route('/groups', {
 
 FlowRouter.route('/groups/:groupId', {
   name: "groupPage",
-  action: function(params, queryParams) {
+  action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "groupPage",
@@ -51,7 +51,7 @@ FlowRouter.route('/groups/:groupId', {
 
 FlowRouter.route('/invites', {
   name: "invites",
-  action: function(params, queryParams) {
+  action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "invitesList",
@@ -62,7 +62,7 @@ FlowRouter.route('/invites', {
 
 FlowRouter.route('/eventPageTemp', {
   name: 'temporaryRoute2',
-  action: function(params, queryParams) {
+  action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "eventPage",
@@ -72,7 +72,7 @@ FlowRouter.route('/eventPageTemp', {
 });
 
 FlowRouter.notFound = {
-  action: function() {
+  action() {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
       main: "pageNotFound",
