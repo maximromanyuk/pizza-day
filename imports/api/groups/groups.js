@@ -29,8 +29,8 @@ Meteor.methods({
       users: [Meteor.userId()],
       menuItems: [{name: 'Item1', price: 10}],
       event: {
-        date: new Date(),
-        status: ''
+        date: '',
+        status: 'no active event'
       },
   	});
   },

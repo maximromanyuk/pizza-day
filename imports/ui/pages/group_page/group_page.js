@@ -19,9 +19,21 @@ Template.groupPage.onCreated(function groupPageOnCreated() {
 
 Template.groupPage.helpers({
 	groupCreator() {
-		let id = FlowRouter.getParam('groupId');
+		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
 		
 		return Groups.findOne().isGroupCreator(id);
+	},
+	status() {
+		const id = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(id)) return;
+
+		return Groups.findOne(id).event.status;
+	},
+	date() {
+		const id = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(id)) return;
+
+		return Groups.findOne(id).event.date;	
 	}
 });
