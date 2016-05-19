@@ -13,8 +13,6 @@ Template.invitesList.onCreated(function invitesListOnCreated() {
 
 Template.invitesList.helpers({
 	invites() {
-		//TODO
-		// return Invites.find();
-		return [{inviter: 'Maksim', group: 'JSSolutions'}];
+		return Invites.find();
 	}
 });
