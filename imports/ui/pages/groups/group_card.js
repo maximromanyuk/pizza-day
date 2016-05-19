@@ -11,7 +11,7 @@ Template.groupCard.helpers({
 		const users = Groups.findOne(this._id).users;
 		const currentUser = Meteor.userId();
 		
-		if($.inArray(currentUser, users) === 0) {
+		if(users.indexOf(currentUser) > -1) {
 			return true;
 		}
 	}
