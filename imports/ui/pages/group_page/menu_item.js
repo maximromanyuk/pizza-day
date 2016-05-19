@@ -1,13 +1,18 @@
 import './menu_item.html';
 
 Template.menuItem.events({
-	'click #add'() {
+	'click #addToOrder'() {
 		
 	},
 	'click #delete'() {
+		const groupId = FlowRouter.getParam('groupId');
 
-	},
-	'click #edit'() {
-
-	},
+		Meteor.call('menu.delete', groupId, this.name, function(err, res) {
+			if(err) {
+				console.log(err);
+			} else {
+				Materialize.toast('Item removed permanently', 4000)
+			}
+		});
+	}
 });

@@ -45,11 +45,9 @@ Meteor.methods({
     Groups.update({_id: groupId}, { $push: { menuItems: {name: name, price: price}}})
   },
 
-  'menu.delete'(groupId, itemId) {
-
-  },
-
-  'menu.edit'(groupId, itemId, newName, newPrice) {
-
+  'menu.delete'(groupId, itemName) {
+    Groups.update({_id: groupId}, 
+                  {$pull: {menuItems: {name: itemName}}},
+                  false, true);
   }
 });
