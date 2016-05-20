@@ -18,11 +18,11 @@ Template.nav.helpers({
 });
 
 Template.nav.events({  
-  'click #login-buttons-logout'() {
-    Meteor.logout(() => {
-      FlowRouter.go('/');
-    });
+  // 'click #login-buttons-logout'() {
+  //   Meteor.logout(() => {
+  //     FlowRouter.go('/');
+  //   });
 
-    return;
-  }
+  //   return;
+  // },
 });
