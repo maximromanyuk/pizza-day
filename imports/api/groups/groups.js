@@ -4,13 +4,6 @@ import { check } from 'meteor/check';
 
 export const Groups = new Mongo.Collection("groups");
 
-Groups.helpers({
-  isGroupCreator(groupId) {
-    const creatorId = Groups.findOne(groupId).creator;
-    return Meteor.userId() === creatorId;
-  }
-});
-
 Meteor.methods({
   //TODO: createEvent, updateEvent, finishEvent
   // methods for adding/updating items in order here too

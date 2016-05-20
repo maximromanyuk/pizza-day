@@ -3,15 +3,17 @@
         <img src={{services.google.picture}} alt="" class="circle">
         <span class="title">
           {{profile.name}}
-          {{#if groupCreator}}
+          {{#if userIsGroupCreator}}
             (creator)
           {{/if}}
         </span>
         <a class="secondary-content">
-          {{#if groupCreator}}
-            <a class="btn-floating btn waves-effect waves-light red right" id="removeUser">
-              <i class="material-icons">remove</i>
-            </a>
+          {{#if hasGroupCreatorRights}}
+            {{#if userIsOwner}}
+              <a class="btn-floating btn waves-effect waves-light red right" id="removeUser">
+                <i class="material-icons">remove</i>
+              </a>
+            {{/if}}
           {{/if}}
         </a>
       </li> 

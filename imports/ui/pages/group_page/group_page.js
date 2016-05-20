@@ -16,11 +16,11 @@ Template.groupPage.onCreated(() => {
 });
 
 Template.groupPage.helpers({
-	groupCreator() {
+	hasGroupCreatorRights() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
 		
-		return Groups.findOne().isGroupCreator(id);
+		return Groups.findOne(id).creator === Meteor.userId();
 	},
 	status() {
 		const id = FlowRouter.getParam('groupId');

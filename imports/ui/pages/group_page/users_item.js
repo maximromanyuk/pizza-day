@@ -7,12 +7,26 @@ import { Groups } from '../../../api/groups/groups.js';
 import './users_item.html';
 
 Template.usersItem.helpers({
-	groupCreator() {
+	userIsGroupCreator() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
 		
-		return Groups.findOne().isGroupCreator(id);
+		return Groups.findOne(id).creator === this._id;
 	},
+
+	hasGroupCreatorRights() {
+		const id = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(id)) return;
+		
+		return Groups.findOne(id).creator === Meteor.userId();
+	},
+
+	userIsOwner() {
+		const id = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(id)) return;
+
+		return !(Groups.findOne(id).creator === this._id);
+	}
 });
 
 Template.usersItem.events({

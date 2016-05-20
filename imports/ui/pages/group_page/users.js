@@ -39,11 +39,11 @@ Template.users.helpers({
 		return users;
 	},
 
-	groupCreator() {
+	hasGroupCreatorRights() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
 		
-		return Groups.findOne().isGroupCreator(id);
+		return Groups.findOne(id).creator === this._id;
 	},
 });
 
