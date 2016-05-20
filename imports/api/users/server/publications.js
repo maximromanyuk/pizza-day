@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-Meteor.publish("users", function() {
+Meteor.publish("users", () => {
   return Meteor.users.find({}, {
   	fields: {
   		'profile.name': 1,
