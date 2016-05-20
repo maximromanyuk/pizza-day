@@ -10,11 +10,9 @@ import './group_page.html';
 import './menu.js';
 import './users.js';
 
-Template.groupPage.onCreated(function groupPageOnCreated() {
-	this.autorun(() => {
-		const id = FlowRouter.getParam('groupId');
-		this.subscribe('group', id);
-	});
+Template.groupPage.onCreated(() => {
+	const id = FlowRouter.getParam('groupId');
+	Meteor.subscribe('group', id);
 });
 
 Template.groupPage.helpers({
@@ -27,7 +25,7 @@ Template.groupPage.helpers({
 	status() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
-
+		
 		return Groups.findOne(id).event.status;
 	},
 	date() {

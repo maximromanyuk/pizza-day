@@ -1,6 +1,8 @@
+import { Template } from 'meteor/templating';
+
 import './event_page.html';
 
-Template.eventPage.rendered=function() {
+Template.eventPage.rendered = () => {
 	$('.datepicker').pickadate({
 		close: 'Close'
 	});

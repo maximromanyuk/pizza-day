@@ -1,14 +1,14 @@
+import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-// Import to load these templates
 import '../../ui/stylesheets/style.css';
 
-import '../../ui/layouts/master_layout.js';
-import '../../ui/pages/home.js';
+import '../../ui/layouts/master_layout.html';
+import '../../ui/pages/home.html';
 import '../../ui/components/nav.js';
-import '../../ui/components/footer.js';
-import '../../ui/pages/page_not_found.js';
+import '../../ui/components/footer.html';
+import '../../ui/pages/page_not_found.html';
 
 import '../../ui/pages/groups/groups_list.js';
 import '../../ui/pages/invites/invites_list.js';
@@ -16,24 +16,23 @@ import '../../ui/pages/invites/invites_list.js';
 import '../../ui/pages/group_page/group_page.js';
 import '../../ui/pages/event_page/event_page.js';
 
+
 FlowRouter.route('/', {
   name: "home",
+  triggersEnter: [redirectIfLoggedIn],
   action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "home",
-      nav: "nav",
+      content: "home",
     });
   }
 });
 
 FlowRouter.route('/groups', {
   name: "groups",
+  triggersEnter: [checkLoggedIn],
   action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "groupsList",
-      nav: "nav",
+      content: "groupsList",
     });
   }
 });
@@ -42,9 +41,7 @@ FlowRouter.route('/groups/:groupId', {
   name: "groupPage",
   action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "groupPage",
-      nav: "nav",
+      content: "groupPage",
     });
   }
 });
@@ -53,9 +50,7 @@ FlowRouter.route('/invites', {
   name: "invites",
   action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "invitesList",
-      nav: "nav",
+      content: "invitesList",
     });
   }
 });
@@ -64,9 +59,7 @@ FlowRouter.route('/eventPageTemp', {
   name: 'temporaryRoute2',
   action(params, queryParams) {
     BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "eventPage",
-      nav: "nav",
+      content: "eventPage",
     });
   }
 });
@@ -74,9 +67,7 @@ FlowRouter.route('/eventPageTemp', {
 FlowRouter.notFound = {
   action() {
     BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "pageNotFound",
-      nav: "nav",
+      content: "pageNotFound",
     });
   }
 };

@@ -10,7 +10,7 @@ Template.menuAddNewItem.events({
 		const name = $('#name').val();
 		const price = $('#price').val();
 
-		Meteor.call('menu.insert', groupId, name, price, function(err, res) {
+		Meteor.call('menu.insert', groupId, name, price, (err, res) => {
 			if(err) {
 				console.log(err);
 			} else {

@@ -8,7 +8,7 @@ import './groups_list.html';
 import './group_card.js';
 import './group_new_card.js';
 
-Template.groupsList.onCreated(function groupsListOnCreated() {
+Template.groupsList.onCreated(() => {
 	Meteor.subscribe('groups');
 });
 

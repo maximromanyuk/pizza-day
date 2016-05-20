@@ -1,4 +1,4 @@
-// Configure accounts-ui or AccountsTemplates(in future)
+// Configure accounts-ui
 import './at-config.js';
 
 // Set up routes

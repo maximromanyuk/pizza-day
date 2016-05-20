@@ -1,7 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { $ } from 'meteor/jquery';
-import { _ } from 'meteor/underscore';
 
 import { Groups } from '../../../api/groups/groups.js';
 import { Invites } from '../../../api/invites/invites.js';
@@ -9,11 +9,11 @@ import { Invites } from '../../../api/invites/invites.js';
 import './users.html';
 import './users_item.js';
 
-Template.users.onCreated(function usersOnCreated() {
-	this.subscribe('users');
+Template.users.onCreated(() => {
+	Meteor.subscribe('users');
 });
 
-Template.users.rendered = function() {
+Template.users.rendered = () => {
 	$('.modal-trigger').leanModal();
 }
 
@@ -23,26 +23,28 @@ Template.users.helpers({
 
 		return Meteor.users.find();
 	},
+	// only users who take part in group
 	participantsList() {
-		let groupId = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(groupId)) return;
+		const id = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(id)) return;
 
-		let users = Groups.findOne(groupId).users;
-
-		let fullUsers = [];
-		for(let i=0; i<users.length; i++) {
-			fullUsers.push(Meteor.users.findOne(users[i]));
+		// in group object we hold just participants ids,
+		// in cycle we get users with name & logo from googleAPI
+		let users = [];
+		const usersIds = Groups.findOne(id).users;
+		for(let i=0; i<usersIds.length; i++) {
+			users.push(Meteor.users.findOne(usersIds[i]));
 		}
 		
-		return fullUsers;
+		return users;
 	},
 
 	groupCreator() {
-		let groupId = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(groupId)) return;
+		const id = FlowRouter.getParam('groupId');
+		if (!Groups.findOne(id)) return;
 		
-		return Groups.findOne().isGroupCreator(groupId);
-	}
+		return Groups.findOne().isGroupCreator(id);
+	},
 });
 
 Template.users.events({
@@ -53,13 +55,13 @@ Template.users.events({
 		$('#modal1').openModal();
 	},
 
-	'submit #user-choose'(e, template) {
+	'submit #user-choose'(e) {
 		e.preventDefault();
 
-		let groupId = FlowRouter.getParam('groupId');
-		let selectedUsrId = $('#user-select').val();
+		const groupId = FlowRouter.getParam('groupId');
+		const selectedUsrId = $('#user-select').val();
 
-		Meteor.call('invites.invite', groupId, selectedUsrId, function(err, res) {
+		Meteor.call('invites.invite', groupId, selectedUsrId, (err, res) => {
 			if(err) {
 				console.log(err);
 			} else {
@@ -67,7 +69,7 @@ Template.users.events({
 				Materialize.toast('Send one more or close popup', 4000)
 			}
 		});
-	}
+	},
 });
 
 
