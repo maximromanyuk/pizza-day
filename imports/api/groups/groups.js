@@ -39,6 +39,11 @@ Meteor.methods({
     Groups.update({_id: groupId}, 
                   { $push: { users: invited}});
   },
+
+  'groups.removeUser'(groupId, user) {
+    Groups.update({_id: groupId}, 
+                  { $pull: { users: user}});
+  },
 });
 
 Meteor.methods({
