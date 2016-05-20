@@ -61,6 +61,19 @@ Template.users.events({
 		const groupId = FlowRouter.getParam('groupId');
 		const selectedUsrId = $('#user-select').val();
 
+		// if user wasn`t selected
+		if(selectedUsrId == null) {
+			Materialize.toast('Please, choose user to invite!', 4000);
+			return;
+		}
+
+		// check maybe this user already in group
+		const users = Groups.findOne(groupId).users;
+		if(users.includes(selectedUsrId)) {
+			Materialize.toast('This user participates already!', 4000);
+			return;
+		}
+
 		Meteor.call('invites.invite', groupId, selectedUsrId, (err, res) => {
 			if(err) {
 				console.log(err);
