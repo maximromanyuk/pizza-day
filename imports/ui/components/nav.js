@@ -16,13 +16,3 @@ Template.nav.helpers({
 		return Invites.find().count();
 	},
 });
-
-Template.nav.events({  
-  // 'click #login-buttons-logout'() {
-  //   Meteor.logout(() => {
-  //     FlowRouter.go('/');
-  //   });
-
-  //   return;
-  // },
-});
