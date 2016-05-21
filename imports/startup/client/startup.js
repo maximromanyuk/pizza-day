@@ -7,10 +7,12 @@ Meteor.startup(() => {
 	(function() {
 		var initializing = true;
   		Invites.find().observeChanges({
-    		added() {
+    		added(id, fields) {
+          if(fields.inviteTo === Meteor.userId()) {
       			if (!initializing) {
         			Materialize.toast('New invite!', 4000);
       			}
+          }
     		}
   	});
   	initializing = false;
