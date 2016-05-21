@@ -4,6 +4,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { Groups } from '../../../api/groups/groups.js';
 
+import { removeUserFromGroup } from '../../../api/groups/methods.js';
+
 import './users_item.html';
 
 Template.usersItem.helpers({
@@ -34,7 +36,10 @@ Template.usersItem.events({
 		const groupId = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(groupId)) return;
 
-		Meteor.call('groups.removeUser', groupId, this._id, (err, res) => {
+		removeUserFromGroup.call({
+			groupId: groupId,
+			userId: this._id
+		}, (err, res) => {
 			if(err) {
 				console.log(err);
 			} else {

@@ -4,6 +4,8 @@ import { $ } from 'meteor/jquery';
 
 import { imageUrlValidator } from '../../../modules/imageUrlValidator.js';
 
+import { createNewGroup } from '../../../api/groups/methods.js';
+
 import './group_new_card.html';
 import './group_new_card.css';
 
@@ -29,17 +31,16 @@ Template.groupNewCard.events({
 				e.target.group_name.value = '';
 				e.target.logo_url.value = '';
 
-				Meteor.call('groups.insert', 
-					name,
-					logoUrl,
-					(err, res) => {
-						if(err) {
+				createNewGroup.call({
+					groupName: name,
+					logoUrl: logoUrl
+				}, (err, res) => {
+					if(err) {
 							alert(err);
 						} else {
 							Materialize.toast(`Group '${name}' created!`, 4000);
 						}
-					}
-				);
+				});
 			}
 		});
 	},

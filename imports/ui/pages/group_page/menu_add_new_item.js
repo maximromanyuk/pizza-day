@@ -4,6 +4,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/underscore';
 
+import { addNewItemToMenu } from '../../../api/groups/methods.js';
+
 import './menu_add_new_item.html';
 
 Template.menuAddNewItem.rendered = () => {
@@ -16,6 +18,7 @@ Template.menuAddNewItem.rendered = () => {
 
 
 Template.menuAddNewItem.events({
+	//TODO: make it using form, catching 'submit'
 	'click #add'() {
 		const groupId = FlowRouter.getParam('groupId');
 		const name = $('#name').val();
@@ -26,7 +29,11 @@ Template.menuAddNewItem.events({
 			return;
 		}
 
-		Meteor.call('menu.insert', groupId, name, price, (err, res) => {
+		addNewItemToMenu.call({
+			groupId: groupId,
+			name: name,
+			price: parseInt(price, 10)
+		}, (err, res) => {
 			if(err) {
 				console.log(err);
 			} else {

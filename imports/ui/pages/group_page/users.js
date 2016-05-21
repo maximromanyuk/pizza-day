@@ -6,6 +6,8 @@ import { $ } from 'meteor/jquery';
 import { Groups } from '../../../api/groups/groups.js';
 import { Invites } from '../../../api/invites/invites.js';
 
+import { invite } from '../../../api/invites/methods.js';
+
 import './users.html';
 import './users_item.js';
 
@@ -74,12 +76,15 @@ Template.users.events({
 			return;
 		}
 
-		Meteor.call('invites.invite', groupId, selectedUsrId, (err, res) => {
+		invite.call({
+			groupId: groupId,
+			invitedId: selectedUsrId
+		}, (err, res) => {
 			if(err) {
 				console.log(err);
 			} else {
-				Materialize.toast('Invite send!', 4000);
-				Materialize.toast('Send one more or close popup', 4000)
+		 		Materialize.toast('Invite send!', 4000);
+		 		Materialize.toast('Send one more or close popup', 4000);
 			}
 		});
 	},
