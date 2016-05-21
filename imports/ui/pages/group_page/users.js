@@ -7,6 +7,7 @@ import { Groups } from '../../../api/groups/groups.js';
 import { Invites } from '../../../api/invites/invites.js';
 
 import { invite } from '../../../api/invites/methods.js';
+import { isUserWasInvitedEarlier } from '../../../api/invites/methods.js';
 
 import './users.html';
 import './users_item.js';
@@ -63,32 +64,36 @@ Template.users.events({
 		const groupId = FlowRouter.getParam('groupId');
 		const selectedUsrId = $('#user-select').val();
 
-		// if user wasn`t selected
-		if(selectedUsrId == null) {
-			Materialize.toast('Please, choose user to invite!', 4000);
-			return;
-		}
-
-		// check maybe this user already in group
-		const users = Groups.findOne(groupId).users;
-		if(users.includes(selectedUsrId)) {
-			Materialize.toast('This user participates already!', 4000);
-			return;
-		}
-
-		invite.call({
-			groupId: groupId,
-			invitedId: selectedUsrId
+		validateUserInviting.call({
+			userId: selectedUsrId,
+			toGroupWithId: groupId
 		}, (err, res) => {
 			if(err) {
-				console.log(err);
+				if(err.error === 'validation-error') {
+					Materialize.toast('Please, choose user to invite!', 4000);
+				} else if(err.error === 'usrInGroupAlready') {
+					Materialize.toast('This user participates already!', 4000);
+				} else if(err.error === 'usrWasInvitedEarlier') {
+					Materialize.toast('This user invited already!', 4000);
+				} else {
+					console.log(err);
+				}
 			} else {
-		 		Materialize.toast('Invite send!', 4000);
-		 		Materialize.toast('Send one more or close popup', 4000);
+				invite.call({
+					groupId: groupId,
+					invitedId: selectedUsrId
+				}, (err, res) => {
+					if(err) {
+						console.log(err);
+					} else {
+						Materialize.toast('Invite send!', 4000);
+						Materialize.toast('Send one more or close popup', 4000);
+					}
+				});
 			}
 		});
 	},
 });
 
 
-		
+
