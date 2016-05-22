@@ -25,6 +25,19 @@ image/logo, menu items that can be ordered in this group (made for simplicity, s
 [Hosted on Heroku](https://best-pizza-day-ever.herokuapp.com) [still in development]
 
 ***
+##How to run
+1.`git clone https://github.com/CandyOgre/pizza-day.git`
+
+2.`cd pizza-day`
+
+3.`curl https://install.meteor.com/ | sh`
+
+4.`npm install`
+
+5.`meteor`
+
+
+***
 ##Technologies stack
 * Meteor 1.3
 * Blaze
