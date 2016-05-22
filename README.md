@@ -32,9 +32,9 @@ image/logo, menu items that can be ordered in this group (made for simplicity, s
 
 3.`curl https://install.meteor.com/ | sh`
 
-4.`npm install`
+4.`meteor npm install`
 
-5.`meteor`
+5.`meteor --settings config/settings.js`
 
 
 ***
