@@ -4,10 +4,9 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { $ } from 'meteor/jquery';
 
 import { Groups } from '../../../api/groups/groups.js';
-import { Invites } from '../../../api/invites/invites.js';
 
 import { invite } from '../../../api/invites/methods.js';
-import { isUserWasInvitedEarlier } from '../../../api/invites/methods.js';
+import { validateUserInviting } from '../../../api/invites/methods.js';
 
 import './users.html';
 import './users_item.js';
@@ -38,14 +37,14 @@ Template.users.helpers({
 		for(let i=0; i<usersIds.length; i++) {
 			users.push(Meteor.users.findOne(usersIds[i]));
 		}
-		
+
 		return users;
 	},
 
 	hasGroupCreatorRights() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
-		
+
 		return Groups.findOne(id).creator === Meteor.userId();
 	},
 });
@@ -94,6 +93,3 @@ Template.users.events({
 		});
 	},
 });
-
-
-
