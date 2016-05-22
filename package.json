@@ -1,10 +1,26 @@
 {
   "name": "pizza-day",
-  "private": true,
-  "scripts": {
-    "start": "meteor run"
+  "version": "1.0.0",
+  "description": "You are software engineer in small development company. Every Wednesday your teammates order pizza delivery in Local Restaurant. Usually there is about 10-15 order items (pizzas, juice etc.) per order. Also, Local Restaurant provides discount coupons if pizza delivery guy was late. ##The Problem After pizza was ordered you need to calculate how many $ each of your co workers owes you in order to pay pizza delivery guy. So, you need to split the check. And there is another problem. Each time you have 1 or couple coupons for free pizza. To keep order you need split this discount (pizza price) between all coworkers who ordered pizza. Also, probably you noticed that you need to do same procedure every Wednesday and it is annoying. So, why not to write small app for it?",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^2.10.2",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-meteor": "^3.5.2"
   },
-  "dependencies": {
-    "meteor-node-stubs": "~0.2.0"
-  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CandyOgre/pizza-day.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CandyOgre/pizza-day/issues"
+  },
+  "homepage": "https://github.com/CandyOgre/pizza-day#readme"
 }
