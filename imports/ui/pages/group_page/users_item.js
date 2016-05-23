@@ -10,42 +10,42 @@ import { removeUserFromGroup } from '../../../api/groups/methods.js';
 import './users_item.html';
 
 Template.usersItem.helpers({
-  userIsGroupCreator() {
-    const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id)) return;
+ userIsGroupCreator() {
+  const id = FlowRouter.getParam('groupId');
+  if (!Groups.findOne(id)) return;
 
-		return Groups.findOne(id).creator === this._id;
-	},
+	return Groups.findOne(id).creator === this._id;
+ },
 
-	hasGroupCreatorRights() {
-		const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id)) return;
+ hasGroupCreatorRights() {
+  const id = FlowRouter.getParam('groupId');
+  if (!Groups.findOne(id)) return;
 
-		return Groups.findOne(id).creator === Meteor.userId();
-	},
+  return Groups.findOne(id).creator === Meteor.userId();
+ },
 
-	userIsOwner() {
-		const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id)) return;
+ userIsOwner() {
+  const id = FlowRouter.getParam('groupId');
+  if (!Groups.findOne(id)) return;
 
-		return !(Groups.findOne(id).creator === this._id);
-	},
+  return !(Groups.findOne(id).creator === this._id);
+ },
 });
 
 Template.usersItem.events({
-	'click #removeUser'() {
-		const groupId = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(groupId)) return;
+ 'click #removeUser'() {
+  const groupId = FlowRouter.getParam('groupId');
+  if (!Groups.findOne(groupId)) return;
 
-		removeUserFromGroup.call({
-			groupId,
-			userId: this._id,
-		}, (err) => {
-			if(err) {
-				console.log(err);
-			} else {
-				Materialize.toast('Participant removed', 4000);
-			}
-		});
-	},
+  removeUserFromGroup.call({
+   groupId,
+   userId: this._id,
+  }, (err) => {
+   if(err) {
+    console.log(err);
+   } else {
+    Materialize.toast('Participant removed', 4000);
+   }
+  });
+ },
 });

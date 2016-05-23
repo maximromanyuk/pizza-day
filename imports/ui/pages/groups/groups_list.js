@@ -9,11 +9,11 @@ import './group_card.js';
 import './group_new_card.js';
 
 Template.groupsList.onCreated(() => {
-	Meteor.subscribe('groups');
+ Meteor.subscribe('groups');
 });
 
 Template.groupsList.helpers({
-	groups() {
-		return Groups.find();
-	},
+ groups() {
+  return Groups.find();
+ },
 });

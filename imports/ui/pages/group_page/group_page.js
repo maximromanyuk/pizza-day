@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Tracker } from 'meteor/tracker';
 
 import { Groups } from '../../../api/groups/groups.js';
 
@@ -19,19 +18,19 @@ Template.groupPage.helpers({
 	hasGroupCreatorRights() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
-		
+
 		return Groups.findOne(id).creator === Meteor.userId();
 	},
 	status() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
-		
+
 		return Groups.findOne(id).event.status;
 	},
 	date() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
 
-		return Groups.findOne(id).event.date;	
-	}
+		return Groups.findOne(id).event.date;
+	},
 });

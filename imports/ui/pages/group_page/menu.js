@@ -11,7 +11,7 @@ Template.menu.helpers({
 	menuItems() {
 		const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
-		
+
 		return Groups.findOne(id).menuItems;
-	}
+	},
 });

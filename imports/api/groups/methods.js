@@ -1,123 +1,122 @@
 import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
 
 import { Groups } from './groups.js';
 
 
 export const addUserToGroup = new ValidatedMethod({
-	name: 'groups.addUser',
+ name: 'groups.addUser',
 
-	mixins : [LoggedInMixin],
+ mixins: [LoggedInMixin],
 
-	checkLoggedInError: {
-	  error: 'notLogged',
-    message: 'You need to be logged in to call this method',//Optional
-    reason: 'You need to login' //Optional
-	},
+ checkLoggedInError: {
+  error: 'notLogged',
+  message: 'You need to be logged in to call this method', // Optional
+  reason: 'You need to login', // Optional
+ },
 
-	validate: new SimpleSchema({
-		groupId: { type: String },
-		inviteTo: { type: String }
-	}).validator(),
+ validate: new SimpleSchema({
+  groupId: { type: String },
+  inviteTo: { type: String },
+ }).validator(),
 
-	run({ groupId, inviteTo }) {
-		const group = Groups.findOne(groupId);
-
-		Groups.update({_id: groupId}, 
-			{ $push: { users: inviteTo}});
-	}
+ run({ groupId, inviteTo }) {
+  Groups.update({_id: groupId},
+   { $push: { users: inviteTo}});
+ },
 });
 
 export const createNewGroup = new ValidatedMethod({
-  name: 'groups.insert',
+ name: 'groups.insert',
 
-  mixins: [LoggedInMixin],
+ mixins: [LoggedInMixin],
 
-  checkLoggedInError: {
-      error: 'notLogged',
-  },
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
 
-  validate: new SimpleSchema({
-  	groupName: { type: String },
-    // TODO: maybe check with imageUrlValidator? 
-    logoUrl: { type: SimpleSchema.RegEx.Url }
-  }).validator(),
+ validate: new SimpleSchema({
+  groupName: { type: String },
+    // TODO: maybe check with imageUrlValidator?
+  logoUrl: { type: SimpleSchema.RegEx.Url },
+ }).validator(),
 
-  run({ groupName, logoUrl }) {
-  	// TODO: make Group class?
-  	Groups.insert({
-  		name: groupName,
-  		logoUrl: logoUrl,
-  		creator: Meteor.userId(),
-  		users: [Meteor.userId()],
-  		menuItems: [{name: 'Item1', price: 10}],
-  		event: {
-  		  date: '',
-  		  status: 'no active event'
-  		},
-  	});
-  }
+ run({ groupName, logoUrl }) {
+  // TODO: make Group class?
+  Groups.insert({
+   name: groupName,
+   logoUrl,
+   creator: Meteor.userId(),
+   users: [Meteor.userId()],
+   menuItems: [{name: 'Item1', price: 10}],
+   event: {
+    date: '',
+    status: 'no active event',
+   },
+  });
+ },
 });
 
 export const removeUserFromGroup = new ValidatedMethod({
-  name: 'groups.removeUser',
+ name: 'groups.removeUser',
 
-  mixins: [LoggedInMixin],
+ mixins: [LoggedInMixin],
 
-  checkLoggedInError: {
-    error: 'notLogged',
-  },
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
 
-  validate: new SimpleSchema({
-  	groupId: { type: String },
-    userId: { type: String }
-  }).validator(),
+ validate: new SimpleSchema({
+  groupId: { type: String },
+  userId: { type: String },
+ }).validator(),
 
-  run({ groupId, userId }) {
-  	Groups.update({_id: groupId}, 
+ run({ groupId, userId }) {
+  Groups.update({_id: groupId},
                   { $pull: { users: userId}});
-  }
+ },
 });
 
 export const addNewItemToMenu = new ValidatedMethod({
-  name: 'menu.insert',
+ name: 'menu.insert',
 
-  mixins: [LoggedInMixin],
+ mixins: [LoggedInMixin],
 
-  checkLoggedInError: {
-    error: 'notLogged',
-  },
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
 
-  validate: new SimpleSchema({
-    groupId: { type: String },
-    name: { type: String },
-    price: { type: Number }
-  }).validator(),
+ validate: new SimpleSchema({
+  groupId: { type: String },
+  name: { type: String },
+  price: { type: Number },
+ }).validator(),
 
-  run({ groupId, name, price }) {
-    Groups.update({_id: groupId}, 
-                  { $push: { menuItems: {name: name, price: price}}});
-  }
+ run({ groupId, name, price }) {
+  Groups.update({_id: groupId},
+{ $push: { menuItems: {name, price}}});
+ },
 });
 
 export const removeItemFromMenu = new ValidatedMethod({
-  name: 'menu.delete',
+ name: 'menu.delete',
 
-  mixins: [LoggedInMixin],
+ mixins: [LoggedInMixin],
 
-  checkLoggedInError: {
-    error: 'notLogged',
-  },
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
 
-  validate: new SimpleSchema({
-    groupId: { type: String },
-    name: { type: String },
-  }).validator(),
+ validate: new SimpleSchema({
+  groupId: { type: String },
+  name: { type: String },
+ }).validator(),
 
-  run({ groupId, name }) {
-    Groups.update({_id: groupId}, 
-                  {$pull: {menuItems: {name: name}}},
+ run({ groupId, name }) {
+  Groups.update({_id: groupId},
+                  {$pull: {menuItems: {name}}},
                   false, true);
-  }
+ },
 });

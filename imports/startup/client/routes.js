@@ -18,87 +18,87 @@ import '../../ui/pages/group_page/group_page.js';
 import '../../ui/pages/event_page/event_page.js';
 
 // triggers
-function checkLoggedIn(ctx, redirect) {  
-  if (!Meteor.userId()) {
-    redirect('/');
-  }
+function checkLoggedIn(ctx, redirect) {
+ if (!Meteor.userId()) {
+  redirect('/');
+ }
 }
 
-function redirectIfLoggedIn(ctx, redirect) {  
-  if (Meteor.userId()) {
-    redirect('/groups');
-  }
+function redirectIfLoggedIn(ctx, redirect) {
+ if (Meteor.userId()) {
+  redirect('/groups');
+ }
 }
 
 // routes
 FlowRouter.route('/', {
-  name: 'home',
-  triggersEnter: [redirectIfLoggedIn],
-  action(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      content: "home",
-    });
-  }
+ name: 'home',
+ triggersEnter: [redirectIfLoggedIn],
+ action() {
+  BlazeLayout.render('masterLayout', {
+   content: 'home',
+  });
+ },
 });
 
 FlowRouter.route('/groups', {
-  name: "groups",
-  triggersEnter: [checkLoggedIn],
-  action(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      content: "groupsList",
-    });
-  }
+ name: 'groups',
+ triggersEnter: [checkLoggedIn],
+ action() {
+  BlazeLayout.render('masterLayout', {
+   content: 'groupsList',
+  });
+ },
 });
 
 FlowRouter.route('/groups/:groupId', {
-  name: "groupPage",
-  action(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      content: "groupPage",
-    });
-  }
+ name: 'groupPage',
+ action() {
+  BlazeLayout.render('masterLayout', {
+   content: 'groupPage',
+  });
+ },
 });
 
 FlowRouter.route('/invites', {
-  name: "invites",
-  triggersEnter: [checkLoggedIn],
-  action(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      content: "invitesList",
-    });
-  }
+ name: 'invites',
+ triggersEnter: [checkLoggedIn],
+ action() {
+  BlazeLayout.render('masterLayout', {
+   content: 'invitesList',
+  });
+ },
 });
 
 FlowRouter.route('/eventPageTemp', {
-  name: 'temporaryRoute2',
-  action(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      content: "eventPage",
-    });
-  }
+ name: 'temporaryRoute2',
+ action() {
+  BlazeLayout.render('masterLayout', {
+   content: 'eventPage',
+  });
+ },
 });
 
 FlowRouter.notFound = {
-  action() {
-    BlazeLayout.render('masterLayout', {
-      content: "pageNotFound",
-    });
-  }
+ action() {
+  BlazeLayout.render('masterLayout', {
+   content: 'pageNotFound',
+  });
+ },
 };
 
 // global subscriptions
 FlowRouter.subscriptions = function() {
-  this.register('invites', Meteor.subscribe('invites'));
+ this.register('invites', Meteor.subscribe('invites'));
 };
 
 // not authorized users redirects to main page
-Tracker.autorun(() => {  
-  if (!Meteor.userId()) {
-    FlowRouter.go('/');
-  }
+Tracker.autorun(() => {
+ if (!Meteor.userId()) {
+  FlowRouter.go('/');
+ }
 });
 
-Accounts.onLogin(() => {  
-  FlowRouter.go('groups');
+Accounts.onLogin(() => {
+ FlowRouter.go('groups');
 });

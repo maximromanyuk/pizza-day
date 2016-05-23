@@ -5,12 +5,12 @@ import { Invites } from '../../api/invites/invites.js';
 
 import './nav.html';
 
-Template.nav.rendered = () => {
-  $(".button-collapse").sideNav();
-};
+Template.nav.onRendered(() => {
+ $('.button-collapse').sideNav();
+});
 
 Template.nav.helpers({
-	invitesCounter() {
-		return Invites.find().count();
-	},
+ invitesCounter() {
+  return Invites.find().count();
+ },
 });
