@@ -59,6 +59,24 @@ export const createNewGroup = new ValidatedMethod({
  },
 });
 
+export const removeGroup = new ValidatedMethod({
+ name: 'groups.remove',
+
+ mixins: [LoggedInMixin],
+
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
+
+ validate: new SimpleSchema({
+  groupId: { type: String },
+ }).validator(),
+
+ run({ groupId }) {
+  Groups.remove({_id: groupId});
+ },
+});
+
 export const removeUserFromGroup = new ValidatedMethod({
  name: 'groups.removeUser',
 
@@ -96,7 +114,7 @@ export const addNewItemToMenu = new ValidatedMethod({
 
  run({ groupId, name, price }) {
   Groups.update({_id: groupId},
-{ $push: { menuItems: {name, price}}});
+                { $push: { menuItems: {name, price}}});
  },
 });
 
