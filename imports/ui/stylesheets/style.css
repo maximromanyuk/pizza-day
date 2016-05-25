@@ -84,3 +84,8 @@ footer {
     /*text-transform: uppercase;*/
     background-color: #ff9800 !important;
 }
+
+/*#modal1,
+#modal2 {
+  z-index: 1500;
+}*/
