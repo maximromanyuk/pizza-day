@@ -17,3 +17,9 @@ class GroupsCollection extends Mongo.Collection {
 }
 
 export const Groups = new GroupsCollection('groups');
+
+Groups.deny({
+ insert() { return true; },
+ update() { return true; },
+ remove() { return true; },
+});
