@@ -59,23 +59,23 @@ export const createNewGroup = new ValidatedMethod({
  },
 });
 
-export const removeGroup = new ValidatedMethod({
- name: 'groups.remove',
-
- mixins: [LoggedInMixin],
-
- checkLoggedInError: {
-  error: 'notLogged',
- },
-
- validate: new SimpleSchema({
-  groupId: { type: String },
- }).validator(),
-
- run({ groupId }) {
-  Groups.remove({_id: groupId});
- },
-});
+// export const removeGroup = new ValidatedMethod({
+//  name: 'groups.remove',
+//
+//  mixins: [LoggedInMixin],
+//
+//  checkLoggedInError: {
+//   error: 'notLogged',
+//  },
+//
+//  validate: new SimpleSchema({
+//   groupId: { type: String },
+//  }).validator(),
+//
+//  run({ groupId }) {
+//   Groups.remove({_id: groupId});
+//  },
+// });
 
 export const removeUserFromGroup = new ValidatedMethod({
  name: 'groups.removeUser',

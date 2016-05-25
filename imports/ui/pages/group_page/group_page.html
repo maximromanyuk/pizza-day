@@ -7,13 +7,25 @@
       <a href="{{pathFor 'temporaryRoute2'}}" class="waves-effect waves-light btn orange">Event Management</a>
       <a class="waves-effect waves-light btn orange" id="deleteGroup">Delete group</a>
     {{else}}
-      <a class="waves-effect waves-light btn orange" id="leaveGroup">Leave group</a>
+      <a class="waves-effect waves-light btn modal-trigger orange" href="#modal2" id="leaveGroupModal">Leave group</a>
     {{/if}}
   </div>
 
   <div class="row">
     {{> menu}}
     {{> users}}
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Are you sure you want to leave {{name}}?</h4>
+      <p>They`ll miss you!</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-green btn-flat" id="leaveGroup">Yes, leave</a>
+      <a class="modal-action modal-close waves-effect waves-green btn-flat">I`m staying!</a>
+    </div>
   </div>
 
 </template>
