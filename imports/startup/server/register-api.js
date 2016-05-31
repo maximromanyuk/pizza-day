@@ -1,6 +1,16 @@
 // This defines all the collections, publications and methods
 // that the application provides as an API to the client.
 
+ServiceConfiguration.configurations.upsert({
+ service: 'google',
+}, {
+ $set: {
+  clientId: Meteor.settings.google.clientId,
+  loginStyle: 'popup',
+  secret: Meteor.settings.google.secret,
+ },
+});
+
 import '../../api/groups/groups.js';
 import '../../api/groups/methods.js';
 import '../../api/groups/server/publications.js';

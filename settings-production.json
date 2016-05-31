@@ -1,0 +1,10 @@
+{
+  "kadira": {
+   "appId": "",
+   "appSecret": ""
+  },
+  "google": {
+     "clientId": "",
+     "secret": ""
+  }
+}

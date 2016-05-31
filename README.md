@@ -34,7 +34,10 @@ image/logo, menu items that can be ordered in this group (made for simplicity, s
 
 4.`meteor npm install`
 
-5.`meteor --settings settings.json`
+5.`meteor --settings settings-development.json`
+
+6.`http://localhost:3000/`
+
 
 
 ***
