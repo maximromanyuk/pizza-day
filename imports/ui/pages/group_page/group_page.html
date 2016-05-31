@@ -12,9 +12,15 @@
   </div>
 
   <div class="row">
-    {{> menu}}
-    {{> users}}
+   {{> menu}}
+   {{> users}}
   </div>
+
+  {{#if activeEvent}}
+   <div class="row">
+    {{> orderItems}}
+   </div>
+  {{/if}}
 
   <!-- Modal Structure -->
   <div id="modal2" class="modal">

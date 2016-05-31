@@ -1,0 +1,20 @@
+<template name="orderItem">
+	<li class="collection-item">
+		<div class="row">
+			{{name}} ({{price}} UAN)
+			{{#if canChangeQuantity}}
+      <a class="btn-floating btn waves-effect waves-light red right" id="removeOne">
+        <i class="material-icons">remove</i>
+      </a>
+      {{/if}}
+      <a class="btn-flat disabled right">
+       <span>1</span>
+      </a>
+      {{#if canChangeQuantity}}
+      <a class="btn-floating btn waves-effect waves-light red right" id="addOne">
+        <i class="material-icons">add</i>
+      </a>
+			{{/if}}
+		</div>
+	</li>
+</template>

@@ -12,6 +12,7 @@ import './group_page.html';
 
 import './menu.js';
 import './users.js';
+import './order_items.js';
 
 Template.groupPage.onRendered(() => {
  $('.modal-trigger').leanModal();
@@ -26,29 +27,37 @@ Template.groupPage.onCreated(() => {
 });
 
 Template.groupPage.helpers({
-	hasGroupCreatorRights() {
-		const id = FlowRouter.getParam('groupId');
+ hasGroupCreatorRights() {
+  const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;
 
 		return Groups.findOne(id).creator === Meteor.userId();
 	},
 	status() {
 		const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id)) return;
+		if (!Groups.findOne(id).event.status) return;
 
 		return Groups.findOne(id).event.status;
 	},
 	date() {
 		const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id)) return;
+		if (!Groups.findOne(id).event.date) return;
 
 		return Groups.findOne(id).event.date;
 	},
   name() {
     const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id)) return;
+		if (!Groups.findOne(id).name) return;
 
 		return Groups.findOne(id).name;
+  },
+  activeEvent() {
+    // TODO return true only when event status === 'ordering' / 'ordered' / 'delivering'
+
+    // const groupId = FlowRouter.getParam('groupId');
+    // const event = Events.findOne(groupId);
+    // return event.status === 'ordering' || 'ordered' || 'delivering';
+    return true;
   },
 });
 

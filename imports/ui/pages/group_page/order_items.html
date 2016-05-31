@@ -1,0 +1,13 @@
+<template name="orderItems">
+  <div class="col s12 m6 push-m3">
+    <ul class="collection with-header">
+
+      <li class="collection-header center"><h4>Order</h4></li>
+
+      {{#each orderItems}}
+        {{> orderItem}}
+      {{/each}}
+
+    </ul>
+  </div>
+</template>

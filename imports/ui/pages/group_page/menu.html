@@ -1,15 +1,15 @@
 <template name="menu">
   <div class="col s12 m6">
     <ul class="collection with-header">
-      
+
       <li class="collection-header center"><h4>Menu</h4></li>
-      
+
       {{> menuAddNewItem}}
 
       {{#each menuItems}}
         {{> menuItem}}
       {{/each}}
-      
+
     </ul>
   </div>
 </template>
