@@ -50,7 +50,7 @@ export const createNewGroup = new ValidatedMethod({
    logoUrl,
    creator: Meteor.userId(),
    users: [Meteor.userId()],
-   menuItems: [{name: 'Item1', price: 10}],
+   menuItems: [],
    event: {
     date: '',
     status: 'no active event',
