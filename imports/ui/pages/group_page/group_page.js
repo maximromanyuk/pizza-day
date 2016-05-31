@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Materialize } from 'meteor/materialize:materialize';
@@ -17,8 +18,11 @@ Template.groupPage.onRendered(() => {
 });
 
 Template.groupPage.onCreated(() => {
-	const id = FlowRouter.getParam('groupId');
-	Meteor.subscribe('group', id);
+ this.getGroupId = () => FlowRouter.getParam('groupId');
+
+ Tracker.autorun(() => {
+  Meteor.subscribe('group', this.getGroupId());
+ });
 });
 
 Template.groupPage.helpers({
