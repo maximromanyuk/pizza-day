@@ -27,6 +27,9 @@ Template.groupPage.onCreated(() => {
 });
 
 Template.groupPage.helpers({
+ groupId() {
+   return FlowRouter.getParam('groupId');
+ },
  hasGroupCreatorRights() {
   const id = FlowRouter.getParam('groupId');
 		if (!Groups.findOne(id)) return;

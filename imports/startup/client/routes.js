@@ -60,21 +60,21 @@ FlowRouter.route('/groups/:groupId', {
  },
 });
 
+FlowRouter.route('/groups/:groupId/event', {
+ name: 'eventPage',
+ action() {
+  BlazeLayout.render('masterLayout', {
+   content: 'eventPage',
+  });
+ },
+});
+
 FlowRouter.route('/invites', {
  name: 'invites',
  triggersEnter: [checkLoggedIn],
  action() {
   BlazeLayout.render('masterLayout', {
    content: 'invitesList',
-  });
- },
-});
-
-FlowRouter.route('/eventPageTemp', {
- name: 'temporaryRoute2',
- action() {
-  BlazeLayout.render('masterLayout', {
-   content: 'eventPage',
   });
  },
 });

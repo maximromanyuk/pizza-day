@@ -4,7 +4,7 @@
     <h3>"Pizza Day" {{date}}</h3>
       <h5>Status: <span class="orange-text">{{status}}</span></h5>
     {{#if hasGroupCreatorRights}}
-      <a href="{{pathFor 'temporaryRoute2'}}" class="waves-effect waves-light btn orange">Event Management</a>
+      <a href={{pathFor 'eventPage' groupId=groupId}} class="waves-effect waves-light btn orange">Event Management</a>
       <a class="waves-effect waves-light btn modal-trigger orange" href="#modal2" id="leaveOrRemoveGroupModal">Delete group</a>
     {{else}}
       <a class="waves-effect waves-light btn modal-trigger orange" href="#modal2" id="leaveOrRemoveGroupModal">Leave group</a>
