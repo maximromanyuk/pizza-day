@@ -1,0 +1,21 @@
+<template name='statusManager'>
+  <div class="col s12 m3">
+
+    <p>Date</p>
+    <input placeholder="Pick a date" type="date" class="datepicker" id="date">
+
+    <!--Dropdown Trigger -->
+    <a class='dropdown-button btn tooltipped' data-position="right" data-delay="50" data-tooltip="Click to change order status" data-activates='orderDropdown'>
+      Status: ordering
+    </a>
+
+    <!-- Dropdown Structure -->
+    <ul id='orderDropdown' class='dropdown-content'>
+      <li><a>ordering</a></li>
+      <li><a>ordered</a></li>
+      <li><a>delivering</a></li>
+      <li><a>delivered</a></li>
+    </ul>
+
+  </div>
+</template>

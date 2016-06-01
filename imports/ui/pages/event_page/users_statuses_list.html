@@ -1,0 +1,30 @@
+<template name="usersStatusesList">
+  <div class="col s12 m9">
+
+    <ul class="collection with-header">
+      <li class="collection-header center"><h4>Users status</h4></li>
+      {{#each usersStatuses}}
+       {{> userStatus}}
+      {{/each}}
+    </ul>
+
+  </div>
+</template>
+
+<template name="userStatus">
+  <li class="collection-item avatar">
+    <img src={{logoUrl}} alt="" class="circle">
+    <span class="title">{{name}}</span>
+    <a class="secondary-content">
+      {{#if confirmed}}
+       <a class="btn right green accent-4">confirmed</a>
+      {{else}}
+        {{#if discarded}}
+         <a class="btn right red accent-4">discarded</a>
+        {{else}}
+         <a class="btn right orange accent-4">sended</a>
+        {{/if}}
+      {{/if}}
+    </a>
+  </li>
+</template>
