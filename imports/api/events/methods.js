@@ -3,6 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
 
 import { Events } from './events.js';
+import { Groups } from '../groups/groups.js';
 
 // insert new invite
 export const createEvent = new ValidatedMethod({
@@ -22,11 +23,22 @@ export const createEvent = new ValidatedMethod({
   if(Events.findOne({ groupId: groupId })) {
    throw new Meteor.Error('Event already started!');
   }
+  const users = Groups.findOne(groupId).users;
+  // make structure for participants collection in event
+  let participants = [];
+  for(let userId of users) {
+   participants.push({
+    userId,
+    inviteStatus: 'sended',
+    items: [],
+   });
+  }
+
   Events.insert({
    groupId,
    date: new Date(),
    status: 'ordering',
-   participants: [],
+   participants,
   });
  },
 });
