@@ -8,11 +8,19 @@ import { setNewStatus } from '../../../api/events/methods.js';
 import './status_manager.html';
 
 Template.statusManager.onRendered(() => {
- $('.datepicker').pickadate({
-  firstDay: 1,
-  // format: 'dd/mm/yyyy',
- });
+ const groupId = FlowRouter.getParam('groupId');
+ const event = Events.findOne({ groupId: groupId });
 
+ // initialize datepicker
+ const $dateInput = $('.datepicker').pickadate({
+  firstDay: 1,
+ });
+ // Use the picker object directly
+ const picker = $dateInput.pickadate('picker');
+ // set actual event date
+ picker.set('select', event.date);
+
+ // initialize dropdown-button
  $('.dropdown-button').dropdown({
   inDuration: 300,
   outDuration: 225,
@@ -46,12 +54,12 @@ Template.statusManager.events({
   setNewStatus.call({
    groupId,
    newStatus: status,
- }, (err) => {
+  }, (err) => {
    if(err) {
-     console.log(err);
+    console.log(err);
    } else {
      Materialize.toast(`Event status: ${status}!`, 4000);
    }
- });
+  });
  },
 });
