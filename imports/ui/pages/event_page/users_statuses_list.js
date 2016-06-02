@@ -27,7 +27,9 @@ Template.usersStatusesList.helpers({
 
    const result = $.grep(event.participants, (obj) => { return obj.userId === userId; });
    const status = result[0].inviteStatus;
+   const userId = result[0].userId;
    users.push({
+    userId,
     name,
     logoUrl,
     status,
@@ -41,8 +43,25 @@ Template.usersStatusesList.helpers({
 Template.userStatus.helpers({
  confirmed() {
   // TODO check in some collection for participant status
+  const id = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: id });
+
+  const result = $.grep(event.participants, (obj) => { return obj.userId === this.userId; });
+  if(result[0].inviteStatus === 'confirmed') {
+   return true;
+  } else {
+   return false;
+  }
  },
  discarded() {
+  const id = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: id });
 
+  const result = $.grep(event.participants, (obj) => { return obj.userId === this.userId; });
+  if(result[0].inviteStatus === 'discarded') {
+   return true;
+  } else {
+   return false;
+  }
  },
 });
