@@ -53,3 +53,26 @@ export const setNewStatus = new ValidatedMethod({
   });
  },
 });
+
+export const setNewDate = new ValidatedMethod({
+ name: 'events.updateDate',
+
+ mixins: [LoggedInMixin],
+
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
+
+ validate: new SimpleSchema({
+  groupId: { type: String },
+   // TODO newStatus can be ONLY: ordering || ordered ||
+   // delivering || delivered
+  newDate: { type: Date },
+ }).validator(),
+
+ run({ groupId, newDate }) {
+  Events.update({ groupId: groupId }, {
+   $set: { date: newDate },
+  });
+ },
+});

@@ -4,6 +4,7 @@ import { $ } from 'meteor/jquery';
 import { Events } from '../../../api/events/events.js';
 
 import { setNewStatus } from '../../../api/events/methods.js';
+import { setNewDate } from '../../../api/events/methods.js';
 
 import './status_manager.html';
 
@@ -43,9 +44,17 @@ Template.statusManager.helpers({
 
 Template.statusManager.events({
  'change #date'(evt) {
-  // TODO at date change, refresh data in db
-  // const choosedDate = new Date(evt.target.value);
-  // setNewDate.call({ newDate: choosedDate, });
+  const groupId = FlowRouter.getParam('groupId');
+  // At date change, refresh data in db
+  const choosedDate = new Date(evt.target.value);
+  setNewDate.call({
+   groupId,
+   newDate: choosedDate,
+  }, (err) => {
+   if(err) {
+    console.log(err);
+   }
+  });
  },
 
  'click #orderDropdown'(evt) {
