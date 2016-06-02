@@ -5,6 +5,8 @@ import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
 import { Events } from './events.js';
 import { Groups } from '../groups/groups.js';
 
+import { inviteUserToEvent } from '../invites/methods.js';
+
 // insert new invite
 export const createEvent = new ValidatedMethod({
  name: 'events.insert',
@@ -33,15 +35,28 @@ export const createEvent = new ValidatedMethod({
     items: [],
    });
   }
-
   Events.insert({
    groupId,
    date: new Date(),
    status: 'ordering',
    participants,
   });
+  inviteToEvent(groupId, users);
  },
 });
+
+const inviteToEvent = function(groupId, users) {
+ for(let userId of users) {
+  inviteUserToEvent.call({
+    groupId,
+    userId,
+  }, (err) => {
+    if(err) {
+      console.log(err)
+    }
+  });
+ }
+};
 
 export const setNewStatus = new ValidatedMethod({
  name: 'events.updateStatus',
@@ -86,5 +101,29 @@ export const setNewDate = new ValidatedMethod({
   Events.update({ groupId: groupId }, {
    $set: { date: newDate },
   });
+ },
+});
+
+export const setEventInvitationStatus = new ValidatedMethod({
+ name: 'events.updateParticipantStatus',
+
+ mixins: [LoggedInMixin],
+
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
+
+ validate: new SimpleSchema({
+  eventId: { type: String },
+  inviteTo: { type: String },
+  newStatus: { type: String },
+ }).validator(),
+
+ run({ eventId, inviteTo, newStatus }) {
+  Events.update(
+    {  '_id': eventId, 'participants.userId': inviteTo },
+   {
+    $set: { 'participants.$.inviteStatus': newStatus },
+   });
  },
 });

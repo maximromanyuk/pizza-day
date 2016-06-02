@@ -5,6 +5,7 @@ import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
 import { _ } from 'meteor/underscore';
 
 import { Invites } from './invites.js';
+import { Events } from '../events/events.js';
 import { Groups } from '../groups/groups.js';
 
 // insert new invite
@@ -30,6 +31,36 @@ export const invite = new ValidatedMethod({
    groupId,
    groupName: group.name,
    inviter: Meteor.user().profile.name,
+   isEventInvite: false,
+  });
+ },
+});
+
+export const inviteUserToEvent = new ValidatedMethod({
+ name: 'invites.inviteToEvent',
+
+ mixins: [LoggedInMixin],
+
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
+
+ validate: new SimpleSchema({
+  groupId: { type: String },
+  userId: { type: String },
+ }).validator(),
+
+ run({ groupId, userId }) {
+  const group = Groups.findOne(groupId);
+  const event = Events.findOne({ groupId: groupId });
+
+  Invites.insert({
+   inviteTo: userId,
+   groupId,
+   groupName: group.name,
+   date: event.date,
+   eventId: event._id,
+   isEventInvite: true
   });
  },
 });

@@ -1,24 +1,43 @@
 <template name="inviteCard">
 
-		<div class="col s12 m4">
-			<div class="card small hoverable">
-				<div class="card-content">
-              		<span class="card-title">Group Invitation</span>
-              		<p>
-              			<a>{{inviter}}</a> invites you to join <a>{{groupName}}</a>
-              		</p>
-            	</div>
-				<div class="card-action">
-              		<a class="waves-effect waves-light left" id="acceptInv">
-              			<i class="material-icons left">done</i>
-              			Accept
-              		</a>
-              		<a class="waves-effect waves-light right" id="declineInv">
-              			<i class="material-icons left">clear</i>
-              			Decline
-              		</a>
-            	</div>
+	<div class="col s12 m4">
+		<div class="card small hoverable">
+			{{#if isEventInvite}}
+			<div class="card-content">
+				<span class="card-title">Upcoming Event</span>
+				<p>
+					<a>{{groupName}}</a> started "Pizza day" at <a>{{date}}</a>
+				</p>
 			</div>
+			<div class="card-action">
+				<a class="waves-effect waves-light left" id="acceptEventInv">
+					<i class="material-icons left">done</i>
+					Participate
+				</a>
+				<a class="waves-effect waves-light right" id="declineEventInv">
+					<i class="material-icons left">clear</i>
+					Decline
+				</a>
+			</div>
+			{{else}}
+			<div class="card-content">
+				<span class="card-title">Group Invitation</span>
+				<p>
+					<a>{{inviter}}</a> invites you to join <a>{{groupName}}</a>
+				</p>
+			</div>
+			<div class="card-action">
+				<a class="waves-effect waves-light left" id="acceptInv">
+					<i class="material-icons left">done</i>
+					Accept
+				</a>
+				<a class="waves-effect waves-light right" id="declineInv">
+					<i class="material-icons left">clear</i>
+					Decline
+				</a>
+			</div>
+			{{/if}}
 		</div>
+	</div>
 
 </template>

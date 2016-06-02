@@ -16,6 +16,8 @@ Template.usersStatusesList.helpers({
  usersStatuses() {
   const id = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: id });
+  if(!event) return;
+
   if (!Groups.findOne(id)) return;
 
    // Get users with name, logoUrl and status from Event
@@ -42,7 +44,6 @@ Template.usersStatusesList.helpers({
 
 Template.userStatus.helpers({
  confirmed() {
-  // TODO check in some collection for participant status
   const id = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: id });
 

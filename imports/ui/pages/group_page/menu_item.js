@@ -13,6 +13,8 @@ Template.menuItem.helpers({
  // show addToOrder button only when event on 'ordering' stage
   const groupId = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
+
   if(event.status === 'ordering') {
    return true;
   } else {
