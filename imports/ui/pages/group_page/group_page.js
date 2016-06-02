@@ -3,8 +3,11 @@ import { Tracker } from 'meteor/tracker';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Materialize } from 'meteor/materialize:materialize';
+import { moment } from 'meteor/momentjs:moment';
 
 import { Groups } from '../../../api/groups/groups.js';
+import { Events } from '../../../api/events/events.js';
+
 import { removeGroup } from '../../../api/groups/methods.js';
 import { removeUserFromGroup } from '../../../api/groups/methods.js';
 
@@ -23,45 +26,56 @@ Template.groupPage.onCreated(() => {
 
  Tracker.autorun(() => {
   Meteor.subscribe('group', this.getGroupId());
+  Meteor.subscribe('event', this.getGroupId());
  });
 });
 
 Template.groupPage.helpers({
  groupId() {
-   return FlowRouter.getParam('groupId');
+  return FlowRouter.getParam('groupId');
  },
+
  hasGroupCreatorRights() {
   const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id)) return;
+  if (!Groups.findOne(id)) return;
 
-		return Groups.findOne(id).creator === Meteor.userId();
-	},
-	status() {
-		const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id).event.status) return;
+  return Groups.findOne(id).creator === Meteor.userId();
+ },
 
-		return Groups.findOne(id).event.status;
-	},
-	date() {
-		const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id).event.date) return;
+ status() {
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if (!event) return;
 
-		return Groups.findOne(id).event.date;
-	},
-  name() {
-    const id = FlowRouter.getParam('groupId');
-		if (!Groups.findOne(id).name) return;
+  return event.status || 'no active event';
+ },
 
-		return Groups.findOne(id).name;
-  },
-  activeEvent() {
-    // TODO return true only when event status === 'ordering' / 'ordered' / 'delivering'
+ date() {
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if (!event) return;
 
-    // const groupId = FlowRouter.getParam('groupId');
-    // const event = Events.findOne(groupId);
-    // return event.status === 'ordering' || 'ordered' || 'delivering';
-    return true;
-  },
+  return moment(event.date).format('D MMM, YYYY');
+ },
+
+ name() {
+  const id = FlowRouter.getParam('groupId');
+  if (!Groups.findOne(id).name) return;
+
+  return Groups.findOne(id).name;
+ },
+
+ activeEvent() {
+ // true when event.status === 'ordering' OR 'ordered' OR 'delivering'
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
+
+  return (event.status === 'ordering' ||
+          event.status === 'ordered' ||
+          event.status ===  'delivering');
+ },
+
 });
 
 Template.groupPage.events({

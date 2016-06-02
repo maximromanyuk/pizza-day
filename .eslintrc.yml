@@ -9,7 +9,7 @@ rules:
   no-undef: 2
   accessor-pairs: 2
   comma-dangle: [2, 'always-multiline']
-  consistent-return: 2
+  consistent-return: 0
   dot-notation: 2
   eqeqeq: 2
   indent: [1, 1]
@@ -20,6 +20,7 @@ rules:
   no-unneeded-ternary: 2
   radix: 2
   semi: [2, always]
+  no-console: 1
 
   # Stylistic Issues
   camelcase: 2
@@ -45,7 +46,7 @@ rules:
   no-class-assign: 2
   no-dupe-class-members: 2
   no-var: 2
-  object-shorthand: 2
+  object-shorthand: 1
   prefer-const: 2
   prefer-spread: 2
   prefer-template: 2

@@ -1,6 +1,10 @@
 import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
 
+import { Events } from '../../../api/events/events.js';
+
+import { setNewStatus } from '../../../api/events/methods.js';
+
 import './status_manager.html';
 
 Template.statusManager.onRendered(() => {
@@ -19,15 +23,35 @@ Template.statusManager.onRendered(() => {
  $('.tooltipped').tooltip({delay: 50});
 });
 
+Template.statusManager.helpers({
+ status() {
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
+
+  return event.status;
+ },
+});
+
 Template.statusManager.events({
  'change #date'(evt) {
   // TODO at date change, refresh data in db
   // const choosedDate = new Date(evt.target.value);
   // setNewDate.call({ newDate: choosedDate, });
  },
+
  'click #orderDropdown'(evt) {
+  const groupId = FlowRouter.getParam('groupId');
   const status = evt.target.text;
-  console.log(status);
-  // setNewStatus.call({ newStatus: status, });
+  setNewStatus.call({
+   groupId,
+   newStatus: status,
+ }, (err) => {
+   if(err) {
+     console.log(err);
+   } else {
+     Materialize.toast(`Event status: ${status}!`, 4000);
+   }
+ });
  },
 });

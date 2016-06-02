@@ -5,6 +5,7 @@ import { Materialize } from 'meteor/materialize:materialize';
 import { $ } from 'meteor/jquery';
 
 import { Groups } from '../../../api/groups/groups.js';
+import { Events } from '../../../api/events/events.js';
 
 import { invite } from '../../../api/invites/methods.js';
 import { validateUserInviting } from '../../../api/invites/methods.js';
@@ -47,6 +48,18 @@ Template.users.helpers({
   if (!Groups.findOne(id)) return;
 
   return Groups.findOne(id).creator === Meteor.userId();
+ },
+
+ eventNotStarted() {
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
+
+  if(event.status === 'delivered' || event.status === '') {
+   return true;
+  } else {
+   return false;
+  }
  },
 });
 

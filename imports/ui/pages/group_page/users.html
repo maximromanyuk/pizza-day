@@ -8,9 +8,11 @@
       {{/each}}
 
       {{#if hasGroupCreatorRights}}
+      {{#if eventNotStarted}}
       <li class="collection-item center-align">
         <a class="waves-effect waves-light btn modal-trigger" id="addParticipant">Add new participant</a>
       </li>
+      {{/if}}
       {{/if}}
 
     </ul>

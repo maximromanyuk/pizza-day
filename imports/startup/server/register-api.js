@@ -19,4 +19,8 @@ import '../../api/invites/invites.js';
 import '../../api/invites/methods.js';
 import '../../api/invites/server/publications.js';
 
+import '../../api/events/events.js';
+import '../../api/events/methods.js';
+import '../../api/events/server/publications.js';
+
 import '../../api/users/server/publications.js';

@@ -35,3 +35,4 @@ dburles:collection-helpers
 tunifight:loggedin-mixin
 meteorhacks:kadira
 service-configuration
+momentjs:moment
