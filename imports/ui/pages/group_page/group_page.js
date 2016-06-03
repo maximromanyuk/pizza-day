@@ -81,10 +81,10 @@ Template.groupPage.helpers({
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
 
-  const result = $.grep(event.participants, (obj) => {
+  const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
-  if(result[0].inviteStatus === 'confirmed') {
+  if(participant.inviteStatus === 'confirmed') {
    return true;
   } else {
    return false;

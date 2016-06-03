@@ -5,7 +5,6 @@ import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
 
 import { Groups } from './groups.js';
 
-
 export const addUserToGroup = new ValidatedMethod({
  name: 'groups.addUser',
 
@@ -97,6 +96,7 @@ export const removeUserFromGroup = new ValidatedMethod({
  },
 });
 
+// TODO check if item with name exists
 export const addNewItemToMenu = new ValidatedMethod({
  name: 'menu.insert',
 

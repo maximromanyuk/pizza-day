@@ -127,3 +127,28 @@ export const setEventInvitationStatus = new ValidatedMethod({
    });
  },
 });
+
+export const addToOrder = new ValidatedMethod({
+ name: 'events.addItemToOrder',
+
+ mixins: [LoggedInMixin],
+
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
+
+ validate: new SimpleSchema({
+  eventId: { type: String },
+  name: { type: String },
+  price: { type: Number },
+  quantity: { type: Number },
+ }).validator(),
+
+ run({ eventId, name, price, quantity }) {
+  // Events.update(
+  //   {  '_id': eventId, 'participants.userId': inviteTo },
+  //  {
+  //   $set: { 'participants.$.inviteStatus': newStatus },
+  //  });
+ },
+});

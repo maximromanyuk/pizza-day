@@ -5,6 +5,7 @@ import { Materialize } from 'meteor/materialize:materialize';
 import { Events } from '../../../api/events/events.js';
 
 import { removeItemFromMenu } from '../../../api/groups/methods.js';
+import { addToOrder } from '../../../api/events/methods.js';
 
 import './menu_item.html';
 
@@ -14,12 +15,12 @@ Template.menuItem.helpers({
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
 
-  const participant = $.grep(event.participants, (obj) => {
+  const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
 
   if(event.status === 'ordering' &&
-      participant[0].inviteStatus === 'confirmed') {
+      participant.inviteStatus === 'confirmed') {
    return true;
   } else {
    return false;
@@ -29,7 +30,22 @@ Template.menuItem.helpers({
 
 Template.menuItem.events({
  'click #addToOrder'() {
-    // TODO
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
+
+  addToOrder.call({
+   eventId: event._id,
+   name: this.name,
+   price: parseInt(this.price, 10),
+   quantity: 1,
+  }, (err) => {
+   if(err) {
+    console.log(err);
+   } else {
+    Materialize.toast('Item in order now!', 4000);
+   }
+  });
  },
  'click #delete'() {
   const groupId = FlowRouter.getParam('groupId');

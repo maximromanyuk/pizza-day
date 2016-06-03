@@ -24,17 +24,15 @@ Template.usersStatusesList.helpers({
   let users = [];
   const usersIds = Groups.findOne(id).users;
   for(let userId of usersIds) {
-   const name = Meteor.users.findOne(userId).profile.name;
-   const logoUrl = Meteor.users.findOne(userId).services.google.picture;
+   const participant = event.participants.find((obj) => {
+    return obj.userId === userId;
+   });
 
-   const result = $.grep(event.participants, (obj) => { return obj.userId === userId; });
-   const status = result[0].inviteStatus;
-   const userId = result[0].userId;
    users.push({
-    userId,
-    name,
-    logoUrl,
-    status,
+    userId: participant.userId,
+    name: Meteor.users.findOne(userId).profile.name,
+    logoUrl: Meteor.users.findOne(userId).services.google.picture,
+    status: participant.inviteStatus,
    });
   }
 
@@ -44,22 +42,14 @@ Template.usersStatusesList.helpers({
 
 Template.userStatus.helpers({
  confirmed() {
-  const id = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: id });
-
-  const result = $.grep(event.participants, (obj) => { return obj.userId === this.userId; });
-  if(result[0].inviteStatus === 'confirmed') {
+  if(this.status === 'confirmed') {
    return true;
   } else {
    return false;
   }
  },
  discarded() {
-  const id = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: id });
-
-  const result = $.grep(event.participants, (obj) => { return obj.userId === this.userId; });
-  if(result[0].inviteStatus === 'discarded') {
+  if(this.status === 'discarded') {
    return true;
   } else {
    return false;
