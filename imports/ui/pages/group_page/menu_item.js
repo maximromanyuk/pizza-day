@@ -10,26 +10,16 @@ import './menu_item.html';
 
 Template.menuItem.helpers({
  canAddToOrder() {
- // show addToOrder button only when event on 'ordering' stage
   const groupId = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
 
-  if(event.status === 'ordering') {
-   return true;
-  } else {
-   return false;
-  }
- },
- participationConfirmed() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
-  if(!event) return;
-
-  const result = $.grep(event.participants, (obj) => {
+  const participant = $.grep(event.participants, (obj) => {
    return obj.userId === Meteor.userId();
   });
-  if(result[0].inviteStatus === 'confirmed') {
+
+  if(event.status === 'ordering' &&
+      participant[0].inviteStatus === 'confirmed') {
    return true;
   } else {
    return false;
