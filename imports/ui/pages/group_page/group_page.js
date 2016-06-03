@@ -76,6 +76,21 @@ Template.groupPage.helpers({
           event.status ===  'delivering');
  },
 
+ participationConfirmed() {
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
+
+  const result = $.grep(event.participants, (obj) => {
+   return obj.userId === Meteor.userId();
+  });
+  if(result[0].inviteStatus === 'confirmed') {
+   return true;
+  } else {
+   return false;
+  }
+ },
+
 });
 
 Template.groupPage.events({

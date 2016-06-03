@@ -17,9 +17,11 @@
   </div>
 
   {{#if activeEvent}}
+  {{#if participationConfirmed}}
    <div class="row">
     {{> orderItems}}
    </div>
+  {{/if}}
   {{/if}}
 
   <!-- Modal Structure -->
