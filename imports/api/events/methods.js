@@ -145,10 +145,52 @@ export const addToOrder = new ValidatedMethod({
  }).validator(),
 
  run({ eventId, name, price, quantity }) {
-  // Events.update(
-  //   {  '_id': eventId, 'participants.userId': inviteTo },
-  //  {
-  //   $set: { 'participants.$.inviteStatus': newStatus },
-  //  });
+  const event = Events.findOne(eventId);
+  const participant = event.participants.find((obj) => {
+   return obj.userId === Meteor.userId();
+  });
+  const orderItems = participant.items;
+
+  const orderItem = orderItems.find((obj) => {
+   return obj.name === name;
+  });
+
+  // if no such item in order -> push item to collection
+  if(orderItem === undefined) {
+   Events.update(
+     {  '_id': eventId, 'participants.userId': Meteor.userId() },
+    {
+     $push: {'participants.$.items': {
+      name,
+      price,
+      quantity,
+     }},
+    }
+  );
+  } else {
+   const newQuantity = orderItem.quantity + quantity;
+   // delete
+   Events.update(
+      {  '_id': eventId, 'participants.userId': Meteor.userId() },
+    {
+     $pull: {'participants.$.items': {
+      name,
+     }},
+    }
+   );
+   // add with new quantity
+   if(newQuantity > 0) {
+    Events.update(
+      {  '_id': eventId, 'participants.userId': Meteor.userId() },
+     {
+      $push: {'participants.$.items': {
+       name,
+       price,
+       quantity: newQuantity,
+      }},
+     }
+   );
+   }
+  }
  },
 });
