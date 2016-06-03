@@ -4,12 +4,10 @@ import './order_item.html';
 
 Template.orderItem.helpers({
  canChangeQuantity() {
-  // TODO true only when event status === ordering
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne(groupId);
 
-  // const groupId = FlowRouter.getParam('groupId');
-  // const event = Events.findOne(groupId);
-  // return event.status === 'ordering';
-  return true;
+  return event.status === 'ordering';
  },
 });
 
