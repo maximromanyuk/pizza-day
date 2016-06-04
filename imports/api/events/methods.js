@@ -1,13 +1,13 @@
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
+import { Materialize } from 'meteor/materialize:materialize';
 
 import { Events } from './events.js';
 import { Groups } from '../groups/groups.js';
 
 import { inviteUserToEvent } from '../invites/methods.js';
 
-// insert new invite
 export const createEvent = new ValidatedMethod({
  name: 'events.insert',
 
@@ -75,6 +75,8 @@ export const setNewStatus = new ValidatedMethod({
  }).validator(),
 
  run({ groupId, newStatus }) {
+   // TODO when set to 'ordering', remove all orderItems
+   // AND set orderComfirmed=false
   Events.update({ groupId: groupId }, {
    $set: { status: newStatus },
   });
@@ -194,3 +196,49 @@ export const addToOrder = new ValidatedMethod({
   }
  },
 });
+
+export const confirmOrder = new ValidatedMethod({
+ name: 'events.confirmParticipantOrder',
+
+ mixins: [LoggedInMixin],
+
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
+
+ validate: new SimpleSchema({
+  groupId: { type: String },
+  orderConfirmed: { type: Boolean },
+ }).validator(),
+
+ run({ groupId, orderConfirmed }) {
+  const event = Events.findOne({ groupId: groupId });
+  Events.update(
+    {  '_id': event._id, 'participants.userId': Meteor.userId() },
+   {
+    $set: { 'participants.$.orderConfirmed': orderConfirmed },
+   });
+
+   checkOrderingStatus(groupId);
+ },
+});
+
+const checkOrderingStatus = function(groupId) {
+ const event = Events.findOne({ groupId: groupId });
+
+ const everyoneConfirmOrder = event.participants.every((obj) => {
+  return obj.orderConfirmed === true;
+ });
+ if(everyoneConfirmOrder) { // each participant confirmed order
+  setNewStatus.call({
+   groupId,
+   newStatus: 'ordered',
+  }, (err) => {
+   if(err) {
+    console.log(err);
+   } else {
+    Materialize.toast('Event status: ordered!', 4000);
+   }
+  });
+ }
+}

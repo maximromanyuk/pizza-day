@@ -8,6 +8,13 @@
         {{> orderItem}}
       {{/each}}
 
+      {{#if ordering}}
+      <li class="collection-item center-align">
+        <a class="waves-effect waves-light btn green accent-4" id="confirmOrder">Order</a>
+        <a class="waves-effect waves-light btn red accent-4" id="declineParticipation">Decline participation</a>
+      </li>
+      {{/if}}
+
     </ul>
   </div>
 </template>

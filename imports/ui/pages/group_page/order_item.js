@@ -13,7 +13,16 @@ Template.orderItem.helpers({
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
 
-  return event.status === 'ordering';
+  const participant = event.participants.find((obj) => {
+   return obj.userId === Meteor.userId();
+  });
+
+  if(event.status === 'ordering' &&
+     participant.orderConfirmed !== true) {
+   return true;
+  } else {
+   return false;
+  }
  },
 });
 
