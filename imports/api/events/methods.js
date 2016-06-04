@@ -77,11 +77,34 @@ export const setNewStatus = new ValidatedMethod({
  run({ groupId, newStatus }) {
    // TODO when set to 'ordering', remove all orderItems
    // AND set orderComfirmed=false
+   // TODO send emails when 'ordered'
+   // TODO delete event when 'delivered'
   Events.update({ groupId: groupId }, {
    $set: { status: newStatus },
   });
+
+  // I can`t check event status here (db insert asynchronous),
+  // failed to do it in callback too
+  // Do it in methods. Don`t know how to do it better
+  sendEmailNotifications(groupId);
+  removeEvent(groupId);
  },
 });
+
+const sendEmailNotifications = function(groupId) {
+ const event = Events.findOne({ groupId: groupId });
+ if(event.status === 'ordered') {
+  // TODO send emails to participants + summary email for creator
+ }
+};
+
+const removeEvent = function(groupId) {
+ const event = Events.findOne({ groupId: groupId });
+ if(event.status === 'delivered') {
+  Events.remove({_id: event._id});
+  Materialize.toast('Order delivered, event ended!', 4000);
+ }
+};
 
 export const setNewDate = new ValidatedMethod({
  name: 'events.updateDate',
@@ -241,4 +264,4 @@ const checkOrderingStatus = function(groupId) {
    }
   });
  }
-}
+};

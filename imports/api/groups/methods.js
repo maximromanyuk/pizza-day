@@ -50,10 +50,6 @@ export const createNewGroup = new ValidatedMethod({
    creator: Meteor.userId(),
    users: [Meteor.userId()],
    menuItems: [],
-   event: {
-    date: '',
-    status: 'no active event',
-   },
   });
  },
 });

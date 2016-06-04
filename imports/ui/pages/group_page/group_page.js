@@ -45,9 +45,12 @@ Template.groupPage.helpers({
  status() {
   const groupId = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: groupId });
-  if (!event) return;
 
-  return event.status || 'no active event';
+  if(event === undefined) {
+   return 'no active event';
+  } else {
+   return event.status;
+  }
  },
 
  date() {
