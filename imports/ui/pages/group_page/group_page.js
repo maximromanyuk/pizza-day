@@ -15,7 +15,7 @@ import './group_page.html';
 
 import './menu.js';
 import './users.js';
-import './order_items.js';
+import './order_list.js';
 
 Template.groupPage.onRendered(() => {
  $('.modal-trigger').leanModal();
@@ -68,18 +68,7 @@ Template.groupPage.helpers({
   return Groups.findOne(id).name;
  },
 
- activeEvent() {
- // true when event.status === 'ordering' OR 'ordered' OR 'delivering'
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
-  if(!event) return;
-
-  return (event.status === 'ordering' ||
-          event.status === 'ordered' ||
-          event.status ===  'delivering');
- },
-
- participationConfirmed() {
+ participatesInEvent() {
   const groupId = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
@@ -87,7 +76,11 @@ Template.groupPage.helpers({
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
-  if(participant.inviteStatus === 'confirmed') {
+
+  if((event.status === 'ordering' ||
+     event.status === 'ordered'   ||
+     event.status ===  'delivering') &&
+     participant.inviteStatus === 'confirmed') {
    return true;
   } else {
    return false;
@@ -98,10 +91,8 @@ Template.groupPage.helpers({
 
 Template.groupPage.events({
  'click #deleteGroup'() {
-  const groupId = FlowRouter.getParam('groupId');
-
   removeGroup.call({
-   groupId,
+   groupId: FlowRouter.getParam('groupId'),
   }, (err) => {
    if(err) {
     console.log(err);
@@ -111,17 +102,15 @@ Template.groupPage.events({
    }
   });
  },
+
  'click #leaveOrRemoveGroupModal'() {
-  // $('#modal2').appendTo('body');
-  // $('#modal2').css('z-index', '1500');
   $('#modal2').openModal();
  },
+
  'click #leaveGroup'() {
-  const groupId = FlowRouter.getParam('groupId');
-  const userId = Meteor.userId();
   removeUserFromGroup.call({
-   groupId,
-   userId,
+   groupId: FlowRouter.getParam('groupId'),
+   userId: Meteor.userId(),
   }, (err) => {
    if(err) {
     console.log(err);

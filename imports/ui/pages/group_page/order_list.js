@@ -6,13 +6,14 @@ import { Events } from '../../../api/events/events.js';
 import { setEventInvitationStatus } from '../../../api/events/methods.js';
 import { confirmOrder } from '../../../api/events/methods.js';
 
-import './order_items.html';
+import './order_list.html';
 import './order_item.js';
 
-Template.orderItems.helpers({
+Template.orderList.helpers({
  orderItems() {
   const groupId = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: groupId });
+
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
@@ -39,7 +40,7 @@ Template.orderItems.helpers({
  },
 });
 
-Template.orderItems.events({
+Template.orderList.events({
  'click #confirmOrder'() {
   const groupId = FlowRouter.getParam('groupId');
   const event = Events.findOne({ groupId: groupId });

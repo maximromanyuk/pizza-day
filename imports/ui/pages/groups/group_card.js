@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 import { Groups } from '../../../api/groups/groups.js';
@@ -7,13 +8,9 @@ import './group_card.css';
 
 Template.groupCard.helpers({
  participant() {
-  const users = Groups.findOne(this._id).users;
+  const groupParticipants = Groups.findOne(this._id).users;
   const currentUser = Meteor.userId();
 
-  if(users.indexOf(currentUser) > -1) {
-   return true;
-  } else {
-   return false;
-  }
+  return groupParticipants.indexOf(currentUser) > -1;
  },
 });

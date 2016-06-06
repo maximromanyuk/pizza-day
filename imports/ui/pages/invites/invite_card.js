@@ -9,13 +9,13 @@ import './invite_card.html';
 import './invite_card.css';
 
 Template.inviteCard.helpers({
-  date() {
-    return moment(this.date).format('D MMM, YYYY');
-  }
+ date() {
+  return moment(this.date).format('D MMM, YYYY');
+ },
 });
 
 Template.inviteCard.events({
- 'click #acceptInv'() {
+ 'click #acceptGroupInv'() {
   addUserToGroup.call({
    groupId: this.groupId,
    inviteTo: this.inviteTo,
@@ -35,12 +35,12 @@ Template.inviteCard.events({
   });
  },
 
- 'click #declineInv'() {
+ 'click #declineGroupInv'() {
   removeInvite.call({
    inviteId: this._id,
   }, (err) => {
    if(err) {
-				console.log(err);
+    console.log(err);
    } else {
     Materialize.toast('Invitation declined.', 4000);
    }

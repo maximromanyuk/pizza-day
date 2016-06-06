@@ -14,7 +14,7 @@ Template.usersItem.helpers({
   const id = FlowRouter.getParam('groupId');
   if (!Groups.findOne(id)) return;
 
-	return Groups.findOne(id).creator === this._id;
+  return Groups.findOne(id).creator === this._id;
  },
 
  hasGroupCreatorRights() {

@@ -1,5 +1,8 @@
 <template name="inviteCard">
-
+<!-- Here I combined 2 types of invites:
+     - invite to event
+		 - invite for patrticipating in event
+ -->
 	<div class="col s12 m4">
 		<div class="card small hoverable">
 			{{#if isEventInvite}}
@@ -27,11 +30,11 @@
 				</p>
 			</div>
 			<div class="card-action">
-				<a class="waves-effect waves-light left" id="acceptInv">
+				<a class="waves-effect waves-light left" id="acceptGroupInv">
 					<i class="material-icons left">done</i>
 					Accept
 				</a>
-				<a class="waves-effect waves-light right" id="declineInv">
+				<a class="waves-effect waves-light right" id="declineGroupInv">
 					<i class="material-icons left">clear</i>
 					Decline
 				</a>

@@ -27,7 +27,6 @@ Template.users.helpers({
 
   return Meteor.users.find();
  },
-	// only users who take part in group
  participantsList() {
   const id = FlowRouter.getParam('groupId');
   if (!Groups.findOne(id)) return;
@@ -55,11 +54,7 @@ Template.users.helpers({
   const event = Events.findOne({ groupId: groupId });
   if(!event) return true;
 
-  if(event.status === 'delivered' || event.status === '') {
-   return true;
-  } else {
-   return false;
-  }
+  return (event.status === 'delivered' || event.status === '');
  },
 });
 

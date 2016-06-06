@@ -20,7 +20,7 @@ Template.menuItem.helpers({
   });
 
   if(event.status === 'ordering' &&
-      participant.inviteStatus === 'confirmed') {
+     participant.inviteStatus === 'confirmed') {
    return true;
   } else {
    return false;
@@ -48,10 +48,8 @@ Template.menuItem.events({
   });
  },
  'click #delete'() {
-  const groupId = FlowRouter.getParam('groupId');
-
   removeItemFromMenu.call({
-   groupId,
+   groupId: FlowRouter.getParam('groupId'),
    name: this.name,
   }, (err) => {
    if(err) {

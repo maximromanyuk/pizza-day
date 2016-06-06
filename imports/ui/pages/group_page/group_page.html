@@ -16,12 +16,10 @@
    {{> users}}
   </div>
 
-  {{#if activeEvent}}
-  {{#if participationConfirmed}}
+  {{#if participatesInEvent}}
    <div class="row">
-    {{> orderItems}}
+    {{> orderList}}
    </div>
-  {{/if}}
   {{/if}}
 
   <!-- Modal Structure -->

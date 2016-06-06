@@ -20,28 +20,27 @@ Template.menuAddNewItem.onRendered(() => {
 Template.menuAddNewItem.events({
 	// TODO: make it using form, catching 'submit'
  'click #add'() {
-  const groupId = FlowRouter.getParam('groupId');
   const name = $('#name').val();
   const price = $('#price').val();
 
   if(_.isEmpty(name) || _.isEmpty(price)) {
-			Materialize.toast('Fill 2 fields, stupid!', 4000);
-			return;
-		}
+   Materialize.toast('Fill 2 fields, stupid!', 4000);
+   return;
+  }
 
-		addNewItemToMenu.call({
-			groupId,
-			name,
-			price: parseInt(price, 10),
-		}, (err) => {
-			if(err) {
-				console.log(err);
-			} else {
-				Materialize.toast('Item added!', 4000);
-			}
-		});
+  addNewItemToMenu.call({
+   groupId: FlowRouter.getParam('groupId'),
+   name,
+   price: parseInt(price, 10),
+  }, (err) => {
+   if(err) {
+    console.log(err);
+   } else {
+    Materialize.toast('Item added!', 4000);
+   }
+  });
 
-		$('#name').val('');
-		$('#price').val('');
+  $('#name').val('');
+  $('#price').val('');
  },
 });
