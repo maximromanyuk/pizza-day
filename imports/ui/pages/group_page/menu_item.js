@@ -4,9 +4,6 @@ import { Materialize } from 'meteor/materialize:materialize';
 
 import { Events } from '../../../api/events/events.js';
 
-import { removeItemFromMenu } from '../../../api/groups/methods.js';
-import { addToOrder } from '../../../api/events/methods.js';
-
 import './menu_item.html';
 
 Template.menuItem.helpers({
@@ -34,7 +31,7 @@ Template.menuItem.events({
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
 
-  addToOrder.call({
+  Meteor.call('events.addItemToOrder', {
    eventId: event._id,
    name: this.name,
    price: parseInt(this.price, 10),
@@ -48,7 +45,7 @@ Template.menuItem.events({
   });
  },
  'click #delete'() {
-  removeItemFromMenu.call({
+  Meteor.call('menu.removeItem', {
    groupId: FlowRouter.getParam('groupId'),
    name: this.name,
   }, (err) => {

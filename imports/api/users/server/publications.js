@@ -5,7 +5,6 @@ Meteor.publish('users', () => {
   fields: {
    'profile.name': 1,
    'services.google.picture': 1,
-   'services.google.email': 1,
   },
  });
 });

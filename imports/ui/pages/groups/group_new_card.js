@@ -3,8 +3,6 @@ import { Materialize } from 'meteor/materialize:materialize';
 
 import { imageUrlValidator } from '../../../modules/imageUrlValidator.js';
 
-import { createNewGroup } from '../../../api/groups/methods.js';
-
 import './group_new_card.html';
 import './group_new_card.css';
 
@@ -30,7 +28,7 @@ Template.groupNewCard.events({
     evt.target.group_name.value = '';
     evt.target.logo_url.value = '';
 
-    createNewGroup.call({
+    Meteor.call('groups.insert', {
      groupName,
      logoUrl,
     }, (err) => {

@@ -12,16 +12,15 @@ ServiceConfiguration.configurations.upsert({
 });
 
 import '../../api/groups/groups.js';
-import '../../api/groups/methods.js';
+import '../../api/groups/server/methods.js';
 import '../../api/groups/server/publications.js';
 
 import '../../api/invites/invites.js';
-import '../../api/invites/methods.js';
+import '../../api/invites/server/methods.js';
 import '../../api/invites/server/publications.js';
 
 import '../../api/events/events.js';
-import '../../api/events/methods.js';
-import '../../api/events/server/publications.js';
 import '../../api/events/server/methods.js';
+import '../../api/events/server/publications.js';
 
 import '../../api/users/server/publications.js';

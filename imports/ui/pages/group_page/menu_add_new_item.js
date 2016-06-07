@@ -4,8 +4,6 @@ import { Materialize } from 'meteor/materialize:materialize';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/underscore';
 
-import { addNewItemToMenu } from '../../../api/groups/methods.js';
-
 import './menu_add_new_item.html';
 
 Template.menuAddNewItem.onRendered(() => {
@@ -28,7 +26,7 @@ Template.menuAddNewItem.events({
    return;
   }
 
-  addNewItemToMenu.call({
+  Meteor.call('menu.addNewItem', {
    groupId: FlowRouter.getParam('groupId'),
    name,
    price: parseInt(price, 10),

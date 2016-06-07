@@ -4,9 +4,9 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
 import { _ } from 'meteor/underscore';
 
-import { Invites } from './invites.js';
-import { Events } from '../events/events.js';
-import { Groups } from '../groups/groups.js';
+import { Invites } from '../invites.js';
+import { Events } from '../../events/events.js';
+import { Groups } from '../../groups/groups.js';
 
 // insert new invite
 export const invite = new ValidatedMethod({
@@ -60,7 +60,7 @@ export const inviteUserToEvent = new ValidatedMethod({
    groupName: group.name,
    date: event.date,
    eventId: event._id,
-   isEventInvite: true
+   isEventInvite: true,
   });
  },
 });

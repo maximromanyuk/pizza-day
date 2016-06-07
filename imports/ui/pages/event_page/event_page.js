@@ -4,8 +4,6 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Materialize } from 'meteor/materialize:materialize';
 
-import { createEvent } from '../../../api/events/methods.js';
-
 import { Events } from '../../../api/events/events.js';
 
 import './event_page.html';
@@ -36,7 +34,7 @@ Template.eventPage.events({
  'click #createEvent'() {
   // TODO create new event
   const groupId = FlowRouter.getParam('groupId');
-  createEvent.call({
+  Meteor.call('events.createNew', {
    groupId,
   }, (err) => {
    if(err) {

@@ -8,9 +8,6 @@ import { moment } from 'meteor/momentjs:moment';
 import { Groups } from '../../../api/groups/groups.js';
 import { Events } from '../../../api/events/events.js';
 
-import { removeGroup } from '../../../api/groups/methods.js';
-import { removeUserFromGroup } from '../../../api/groups/methods.js';
-
 import './group_page.html';
 
 import './menu.js';
@@ -91,7 +88,7 @@ Template.groupPage.helpers({
 
 Template.groupPage.events({
  'click #deleteGroup'() {
-  removeGroup.call({
+  Meteor.call('groups.remove', {
    groupId: FlowRouter.getParam('groupId'),
   }, (err) => {
    if(err) {
@@ -108,7 +105,7 @@ Template.groupPage.events({
  },
 
  'click #leaveGroup'() {
-  removeUserFromGroup.call({
+  Meteor.call('groups.removeUser', {
    groupId: FlowRouter.getParam('groupId'),
    userId: Meteor.userId(),
   }, (err) => {

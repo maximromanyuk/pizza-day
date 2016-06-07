@@ -1,10 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Materialize } from 'meteor/materialize:materialize';
 
-import { addUserToGroup } from '../../../api/groups/methods.js';
-import { removeInvite } from '../../../api/invites/methods.js';
-import { setEventInvitationStatus } from '../../../api/events/methods.js';
-
 import './invite_card.html';
 import './invite_card.css';
 
@@ -16,14 +12,14 @@ Template.inviteCard.helpers({
 
 Template.inviteCard.events({
  'click #acceptGroupInv'() {
-  addUserToGroup.call({
+  Meteor.call('groups.addUser', {
    groupId: this.groupId,
    inviteTo: this.inviteTo,
   }, (err) => {
    if(err) {
     console.log(err);
    } else {
-    removeInvite.call({
+    Meteor.call('invites.remove', {
      inviteId: this._id,
     }, (err) => {
      if(err) {
@@ -36,7 +32,7 @@ Template.inviteCard.events({
  },
 
  'click #declineGroupInv'() {
-  removeInvite.call({
+  Meteor.call('invites.remove', {
    inviteId: this._id,
   }, (err) => {
    if(err) {
@@ -48,7 +44,7 @@ Template.inviteCard.events({
  },
 
  'click #acceptEventInv'() {
-  setEventInvitationStatus.call({
+  Meteor.call('events.updateParticipantStatus', {
    eventId: this.eventId,
    inviteTo: this.inviteTo,
    newStatus: 'confirmed',
@@ -56,7 +52,7 @@ Template.inviteCard.events({
    if(err) {
     console.log(err);
    } else {
-    removeInvite.call({
+    Meteor.call('invites.remove', {
      inviteId: this._id,
     }, (err) => {
      if(err) {
@@ -69,7 +65,7 @@ Template.inviteCard.events({
  },
 
  'click #declineEventInv'() {
-  setEventInvitationStatus.call({
+  Meteor.call('events.updateParticipantStatus', {
    eventId: this.eventId,
    inviteTo: this.inviteTo,
    newStatus: 'discarded',
@@ -77,7 +73,7 @@ Template.inviteCard.events({
    if(err) {
     console.log(err);
    } else {
-    removeInvite.call({
+    Meteor.call('invites.remove', {
      inviteId: this._id,
     }, (err) => {
      if(err) {

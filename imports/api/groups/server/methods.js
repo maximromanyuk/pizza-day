@@ -3,7 +3,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
 
-import { Groups } from './groups.js';
+import { Groups } from '../groups.js';
 
 export const addUserToGroup = new ValidatedMethod({
  name: 'groups.addUser',
@@ -94,7 +94,7 @@ export const removeUserFromGroup = new ValidatedMethod({
 
 // TODO check if item with name exists
 export const addNewItemToMenu = new ValidatedMethod({
- name: 'menu.insert',
+ name: 'menu.addNewItem',
 
  mixins: [LoggedInMixin],
 
@@ -115,7 +115,7 @@ export const addNewItemToMenu = new ValidatedMethod({
 });
 
 export const removeItemFromMenu = new ValidatedMethod({
- name: 'menu.delete',
+ name: 'menu.removeItem',
 
  mixins: [LoggedInMixin],
 

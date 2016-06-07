@@ -5,8 +5,6 @@ import { Materialize } from 'meteor/materialize:materialize';
 
 import { Groups } from '../../../api/groups/groups.js';
 
-import { removeUserFromGroup } from '../../../api/groups/methods.js';
-
 import './users_item.html';
 
 Template.usersItem.helpers({
@@ -37,7 +35,7 @@ Template.usersItem.events({
   const groupId = FlowRouter.getParam('groupId');
   if (!Groups.findOne(groupId)) return;
 
-  removeUserFromGroup.call({
+  Meteor.call('groups.removeUser', {
    groupId,
    userId: this._id,
   }, (err) => {

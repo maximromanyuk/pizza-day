@@ -7,9 +7,6 @@ import { $ } from 'meteor/jquery';
 import { Groups } from '../../../api/groups/groups.js';
 import { Events } from '../../../api/events/events.js';
 
-import { invite } from '../../../api/invites/methods.js';
-import { validateUserInviting } from '../../../api/invites/methods.js';
-
 import './users.html';
 import './users_item.js';
 
@@ -35,8 +32,8 @@ Template.users.helpers({
 		// in cycle we get users with name & logo from googleAPI
   let users = [];
   const usersIds = Groups.findOne(id).users;
-  for(let i=0; i<usersIds.length; i++) {
-   users.push(Meteor.users.findOne(usersIds[i]));
+  for(const usrId of usersIds) {
+   users.push(Meteor.users.findOne(usrId));
   }
 
   return users;
@@ -72,7 +69,7 @@ Template.users.events({
   const groupId = FlowRouter.getParam('groupId');
   const selectedUsrId = $('#user-select').val();
 
-  validateUserInviting.call({
+  Meteor.call('invites.checkForInvite', {
    userId: selectedUsrId,
    toGroupWithId: groupId,
   }, (err) => {
@@ -87,7 +84,7 @@ Template.users.events({
      console.log(err);
     }
    } else {
-    invite.call({
+    Meteor.call('invites.invite', {
      groupId,
      invitedId: selectedUsrId,
     }, (err) => {

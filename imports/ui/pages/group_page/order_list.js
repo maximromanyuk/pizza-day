@@ -3,9 +3,6 @@ import { Materialize } from 'meteor/materialize:materialize';
 
 import { Events } from '../../../api/events/events.js';
 
-import { setEventInvitationStatus } from '../../../api/events/methods.js';
-import { confirmOrder } from '../../../api/events/methods.js';
-
 import './order_list.html';
 import './order_item.js';
 
@@ -61,7 +58,7 @@ Template.orderList.events({
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
 
-  confirmOrder.call({
+  Meteor.call('events.confirmParticipantOrder', {
    groupId,
    orderConfirmed: true,
   }, (err) => {
@@ -78,7 +75,7 @@ Template.orderList.events({
   const event = Events.findOne({ groupId: groupId });
   if(!event) return;
 
-  setEventInvitationStatus.call({
+  Meteor.call('events.updateParticipantStatus', {
    eventId: event._id,
    inviteTo: Meteor.userId(),
    newStatus: 'discarded',
