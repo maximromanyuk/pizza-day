@@ -7,6 +7,7 @@ import { SSR } from 'meteor/meteorhacks:ssr';
 
 import { Events } from '../events.js';
 import { Groups } from '../../groups/groups.js';
+import { Invites } from '../../invites/invites.js';
 
 export const createEvent = new ValidatedMethod({
  name: 'events.createNew',
@@ -322,5 +323,7 @@ const removeEvent = (groupId) => {
  const event = Events.findOne({ groupId: groupId });
  if(event.status === 'delivered') {
   Events.remove({_id: event._id});
+  // remove old invites too
+  Invites.remove({ groupId: groupId });
  }
 };
