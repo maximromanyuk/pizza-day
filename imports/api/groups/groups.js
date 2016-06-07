@@ -4,14 +4,7 @@ import { Invites } from '../invites/invites.js';
 
 class GroupsCollection extends Mongo.Collection {
  remove(selector, callback) {
-  console.log(selector);
-  Invites.remove({groupId: selector._id}, (err) => {
-   if(err) {
-    console.log(err);
-   } else {
-    console.log('Invites from this group was removed');
-   }
-  });
+  Invites.remove({groupId: selector._id});
   return super.remove(selector, callback);
  }
 }

@@ -38,6 +38,21 @@ Template.orderList.helpers({
    return false;
   }
  },
+ notEmpty() {
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
+
+  const participant = event.participants.find((obj) => {
+   return obj.userId === Meteor.userId();
+  });
+
+  if(participant.items.length !== 0) {
+   return true;
+  } else {
+   return false;
+  }
+ },
 });
 
 Template.orderList.events({
