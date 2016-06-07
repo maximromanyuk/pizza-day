@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
@@ -55,54 +56,6 @@ const inviteToEvent = function(groupId, users) {
       console.log(err)
     }
   });
- }
-};
-
-export const setNewStatus = new ValidatedMethod({
- name: 'events.updateStatus',
-
- mixins: [LoggedInMixin],
-
- checkLoggedInError: {
-  error: 'notLogged',
- },
-
- validate: new SimpleSchema({
-  groupId: { type: String },
-   // TODO newStatus can be ONLY: ordering || ordered ||
-   // delivering || delivered
-  newStatus: { type: String },
- }).validator(),
-
- run({ groupId, newStatus }) {
-   // TODO when set to 'ordering', remove all orderItems
-   // AND set orderComfirmed=false
-   // TODO send emails when 'ordered'
-   // TODO delete event when 'delivered'
-  Events.update({ groupId: groupId }, {
-   $set: { status: newStatus },
-  });
-
-  // I can`t check event status here (db insert asynchronous),
-  // failed to do it in callback too
-  // Do it in methods. Don`t know how to do it better
-  sendEmailNotifications(groupId);
-  removeEvent(groupId);
- },
-});
-
-const sendEmailNotifications = function(groupId) {
- const event = Events.findOne({ groupId: groupId });
- if(event.status === 'ordered') {
-  // TODO send emails to participants + summary email for creator
- }
-};
-
-const removeEvent = function(groupId) {
- const event = Events.findOne({ groupId: groupId });
- if(event.status === 'delivered') {
-  Events.remove({_id: event._id});
-  Materialize.toast('Order delivered, event ended!', 4000);
  }
 };
 
@@ -253,15 +206,7 @@ const checkOrderingStatus = function(groupId) {
   return obj.orderConfirmed === true;
  });
  if(everyoneConfirmOrder) { // each participant confirmed order
-  setNewStatus.call({
-   groupId,
-   newStatus: 'ordered',
-  }, (err) => {
-   if(err) {
-    console.log(err);
-   } else {
-    Materialize.toast('Event status: ordered!', 4000);
-   }
-  });
+  Meteor.call('events.updateStatus',
+   { groupId, newStatus: 'ordered' });
  }
 };

@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>HTML email for group participant</title>
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+  }
+  </style>
+</head>
+<body>
+  <h1>Order details</h1>
+  <table>
+    <tr>
+      <td style='padding: 8px;'>Name</td>
+      <td style='padding: 8px;'>Price</td>
+      <td style='padding: 8px;'>Quantity</td>
+    </tr>
+    {{#each orderItems}}
+    <tr>
+      <td style='padding: 8px;'>{{name}}</td>
+      <td style='padding: 8px;'>{{price}} UAN</td>
+      <td style='padding: 8px;'>{{quantity}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  <p style='padding: 0px;'>Your total: {{total}} UAN</p>
+
+</body>
+</html>

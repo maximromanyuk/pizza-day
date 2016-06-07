@@ -1,9 +1,10 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
 
 import { Events } from '../../../api/events/events.js';
 
-import { setNewStatus } from '../../../api/events/methods.js';
+// import { setNewStatus } from '../../../api/events/server/methods.js';
 import { setNewDate } from '../../../api/events/methods.js';
 
 import './status_manager.html';
@@ -60,15 +61,17 @@ Template.statusManager.events({
  'click #orderDropdown'(evt) {
   const groupId = FlowRouter.getParam('groupId');
   const status = evt.target.text;
-  setNewStatus.call({
-   groupId,
-   newStatus: status,
-  }, (err) => {
-   if(err) {
-    console.log(err);
-   } else {
-     Materialize.toast(`Event status: ${status}!`, 4000);
-   }
-  });
+  Meteor.call('events.updateStatus',
+              { groupId, newStatus: status });
+  // setNewStatus.call({
+  //  groupId,
+  //  newStatus: status,
+  // }, (err) => {
+  //  if(err) {
+  //   console.log(err);
+  //  } else {
+  //    Materialize.toast(`Event status: ${status}!`, 4000);
+  //  }
+  // });
  },
 });

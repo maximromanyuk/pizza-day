@@ -22,5 +22,6 @@ import '../../api/invites/server/publications.js';
 import '../../api/events/events.js';
 import '../../api/events/methods.js';
 import '../../api/events/server/publications.js';
+import '../../api/events/server/methods.js';
 
 import '../../api/users/server/publications.js';

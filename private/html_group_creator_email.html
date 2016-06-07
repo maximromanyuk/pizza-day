@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>HTML email for group creator</title>
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+  }
+  </style>
+</head>
+<body>
+  <h1>Group order</h1>
+  <table>
+    <tr>
+      <td style='padding: 8px;'>Name</td>
+      <td style='padding: 8px;'>Price</td>
+      <td style='padding: 8px;'>Quantity</td>
+    </tr>
+    {{#each groupOrderItems}}
+    <tr>
+      <td style='padding: 8px;'>{{name}}</td>
+      <td style='padding: 8px;'>{{price}} UAN</td>
+      <td style='padding: 8px;'>{{quantity}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  <p style='padding: 0px;'>Group total: {{groupTotal}} UAN</p>
+
+</body>
+</html>

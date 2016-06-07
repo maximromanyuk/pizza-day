@@ -36,3 +36,5 @@ tunifight:loggedin-mixin
 meteorhacks:kadira
 service-configuration
 momentjs:moment
+meteorhacks:ssr
+email
