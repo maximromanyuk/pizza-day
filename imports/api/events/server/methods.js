@@ -127,6 +127,9 @@ export const addToOrder = new ValidatedMethod({
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
+  // do not allow users not in group to add items to order
+  if(!participant) return;
+
   const orderItems = participant.items;
 
   const orderItem = orderItems.find((obj) => {
