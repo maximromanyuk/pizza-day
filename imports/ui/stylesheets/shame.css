@@ -85,6 +85,11 @@ footer {
     background-color: #ff9800 !important;
 }
 
+.disabled-li{
+    pointer-events:none;
+    opacity:0.4;
+}
+
 /*#modal1,
 #modal2 {
   z-index: 1500;
