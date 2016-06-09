@@ -19,10 +19,10 @@ Template.usersStatusesList.helpers({
 
   if (!Groups.findOne(id)) return;
 
-   // Get users with name, logoUrl and status from Event
+   // Get users with name, logoUrl and status from event
   let users = [];
   const usersIds = Groups.findOne(id).users;
-  for(let userId of usersIds) {
+  for(const userId of usersIds) {
    const participant = event.participants.find((obj) => {
     return obj.userId === userId;
    });

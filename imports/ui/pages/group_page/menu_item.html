@@ -10,6 +10,21 @@
 				<i class="material-icons">add</i>
 			</a>
 			{{/if}}
+			<a class="btn-flat disabled right"></a>
+			{{#if hasGroupCreatorRights}} {{#if canAddCoupon}}
+			<a class="btn-floating btn waves-effect waves-light red right" id="removeCoupon">
+				<i class="material-icons">remove</i>
+			</a>
+			{{/if}} {{/if}}
+			<a class="btn-flat disabled tooltipped right"
+			   data-position="bottom" data-delay="50" data-tooltip="Free Coupons!">
+       <span>{{coupons}}</span>
+      </a>
+			{{#if hasGroupCreatorRights}} {{#if canAddCoupon}}
+			<a class="btn-floating btn waves-effect waves-light red right" id="addCoupon">
+				<i class="material-icons">add</i>
+			</a>
+			{{/if}} {{/if}}
 		</div>
 	</li>
 </template>

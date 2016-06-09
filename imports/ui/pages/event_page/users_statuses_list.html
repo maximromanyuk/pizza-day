@@ -18,13 +18,11 @@
     <a class="secondary-content">
       {{#if confirmed}}
        <a class="btn right green accent-4">confirmed</a>
+      {{else}} {{#if discarded}}
+       <a class="btn right red accent-4">discarded</a>
       {{else}}
-        {{#if discarded}}
-         <a class="btn right red accent-4">discarded</a>
-        {{else}}
-         <a class="btn right orange accent-4">sended</a>
-        {{/if}}
-      {{/if}}
+       <a class="btn right orange accent-4">sended</a>
+      {{/if}} {{/if}}
     </a>
   </li>
 </template>

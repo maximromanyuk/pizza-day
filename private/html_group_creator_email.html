@@ -29,7 +29,20 @@
     </tr>
     {{/each}}
   </table>
-  <p style='padding: 0px;'>Group total: {{groupTotal}} UAN</p>
+  <h3>Coupons</h3>
+  <table>
+    <tr>
+      <td style='padding: 8px;'>Name</td>
+      <td style='padding: 8px;'>Coupons</td>
+    </tr>
+    {{#each groupItems}}
+    <tr>
+      <td style='padding: 8px;'>{{name}}</td>
+      <td style='padding: 8px;'>{{coupons}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  <p style='padding: 0px;'>Group total with discount: {{groupTotal}} UAN</p>
 
 </body>
 </html>

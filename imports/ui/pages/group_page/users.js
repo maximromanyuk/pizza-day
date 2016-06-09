@@ -48,7 +48,7 @@ Template.users.helpers({
 
  eventNotStarted() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return true;
 
   return (event.status === 'delivered' || event.status === '');

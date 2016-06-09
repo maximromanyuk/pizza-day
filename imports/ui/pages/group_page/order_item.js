@@ -8,7 +8,7 @@ import './order_item.html';
 Template.orderItem.helpers({
  canChangeQuantity() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
@@ -27,7 +27,7 @@ Template.orderItem.helpers({
 Template.orderItem.events({
  'click #addOne'() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return;
 
   Meteor.call('events.addItemToOrder', {
@@ -43,7 +43,7 @@ Template.orderItem.events({
  },
  'click #removeOne'() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return;
 
   Meteor.call('events.addItemToOrder', {

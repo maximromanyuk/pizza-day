@@ -8,13 +8,11 @@
           {{/if}}
         </span>
         <a class="secondary-content">
-          {{#if hasGroupCreatorRights}}
-            {{#if userIsOwner}}
-              <a class="btn-floating btn waves-effect waves-light red right" id="removeUser">
-                <i class="material-icons">remove</i>
-              </a>
-            {{/if}}
-          {{/if}}
+          {{#if hasGroupCreatorRights}} {{#if userIsOwner}}
+          <a class="btn-floating btn waves-effect waves-light red right" id="removeUser">
+            <i class="material-icons">remove</i>
+          </a>
+          {{/if}} {{/if}}
         </a>
-      </li> 
+      </li>
   </template>

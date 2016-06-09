@@ -9,7 +9,7 @@ import './order_item.js';
 Template.orderList.helpers({
  orderItems() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
 
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
@@ -20,7 +20,7 @@ Template.orderList.helpers({
 
  ordering() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
@@ -37,7 +37,7 @@ Template.orderList.helpers({
  },
  notEmpty() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
@@ -55,7 +55,7 @@ Template.orderList.helpers({
 Template.orderList.events({
  'click #confirmOrder'() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return;
 
   Meteor.call('events.confirmParticipantOrder', {
@@ -72,7 +72,7 @@ Template.orderList.events({
 
  'click #declineParticipation'() {
   const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   if(!event) return;
 
   Meteor.call('events.updateParticipantStatus', {

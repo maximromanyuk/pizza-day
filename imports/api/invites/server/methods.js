@@ -52,7 +52,7 @@ export const inviteUserToEvent = new ValidatedMethod({
 
  run({ groupId, userId }) {
   const group = Groups.findOne(groupId);
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
 
   Invites.insert({
    inviteTo: userId,

@@ -110,7 +110,7 @@ export const addNewItemToMenu = new ValidatedMethod({
 
  run({ groupId, name, price }) {
   Groups.update({_id: groupId},
-                { $push: { menuItems: {name, price}}});
+                { $push: { menuItems: {name, price, coupons: 0}}});
  },
 });
 
@@ -132,5 +132,33 @@ export const removeItemFromMenu = new ValidatedMethod({
   Groups.update({_id: groupId},
                   {$pull: {menuItems: {name}}},
                   false, true);
+ },
+});
+
+export const addCoupon = new ValidatedMethod({
+ name: 'group.addCoupon',
+
+ mixins: [LoggedInMixin],
+
+ checkLoggedInError: {
+  error: 'notLogged',
+ },
+
+ validate: new SimpleSchema({
+  groupId: { type: String },
+  name: { type: String },
+  quantity: { type: Number },
+ }).validator(),
+
+ run({ groupId, name, quantity }) {
+  const group = Groups.findOne(groupId);
+  const menuItem = group.menuItems.find((obj) => {
+   return obj.name === name;
+  });
+  const newCouponsQuantity = menuItem.coupons + quantity;
+  if(newCouponsQuantity < 0) return;
+
+  Groups.update({_id: groupId, 'menuItems.name': name},
+                { $set: { 'menuItems.$.coupons': newCouponsQuantity }});
  },
 });

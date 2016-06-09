@@ -23,13 +23,13 @@ export const createEvent = new ValidatedMethod({
  }).validator(),
 
  run({ groupId }) {
-  if(Events.findOne({ groupId: groupId })) {
+  if(Events.findOne({ groupId })) {
    throw new Meteor.Error('Event already started!');
   }
   const users = Groups.findOne(groupId).users;
   // make structure for participants collection in event
   let participants = [];
-  for(let userId of users) {
+  for(const userId of users) {
    participants.push({
     userId,
     inviteStatus: 'sended',
@@ -47,7 +47,7 @@ export const createEvent = new ValidatedMethod({
 });
 
 const inviteToEvent = (groupId, users) => {
- for(let userId of users) {
+ for(const userId of users) {
   Meteor.call('invites.inviteToEvent', {
    groupId,
    userId,
@@ -76,7 +76,7 @@ export const setNewDate = new ValidatedMethod({
  }).validator(),
 
  run({ groupId, newDate }) {
-  Events.update({ groupId: groupId }, {
+  Events.update({ groupId }, {
    $set: { date: newDate },
   });
  },
@@ -192,7 +192,7 @@ export const confirmOrder = new ValidatedMethod({
  }).validator(),
 
  run({ groupId, orderConfirmed }) {
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({ groupId });
   Events.update(
     {  '_id': event._id, 'participants.userId': Meteor.userId() },
    {
@@ -204,7 +204,7 @@ export const confirmOrder = new ValidatedMethod({
 });
 
 const checkOrderingStatus = (groupId) => {
- const event = Events.findOne({ groupId: groupId });
+ const event = Events.findOne({ groupId });
 
  const everyoneConfirmOrder = event.participants.every((obj) => {
   return obj.orderConfirmed === true;
@@ -234,7 +234,7 @@ export const setNewStatus = new ValidatedMethod({
  run({ groupId, newStatus }) {
    // TODO when set to 'ordering', remove all orderItems
    // AND set orderComfirmed=false
-  Events.update({ groupId: groupId }, {
+  Events.update({ groupId }, {
    $set: { status: newStatus },
   });
 
@@ -249,33 +249,70 @@ export const setNewStatus = new ValidatedMethod({
  },
 });
 
+// TODO too big function! Refactor it! NOW!
 const sendEmailNotifications = (groupId) => {
  const group = Groups.findOne(groupId);
- const event = Events.findOne({ groupId: groupId });
+ const event = Events.findOne({ groupId });
 
  if(event.status !== 'ordered') return;
  SSR.compileTemplate( 'htmlEmail', Assets.getText( 'html_email.html' ) );
  SSR.compileTemplate( 'htmlGroupCreatorEmail', Assets.getText( 'html_group_creator_email.html' ) );
 
- // computes total sum of participant items
- const total = (participant) => {
+// computes total sum of participant items
+ const discountedTotal = (participant) => {
   let summary = 0;
+  // each item in order
   for(const item of participant.items) {
-   summary += (item.price * item.quantity);
+   let totalItemPrice = 0;
+   // compare with each item in group menu
+   for(const groupItem of group.menuItems) {
+    if(groupItem.name === item.name) {
+     // where find coupons
+     if(groupItem.coupons !== 0) {
+      // and count a total of all ordered items with this name,
+      // for counting discount
+      let totalCountOfOrderedItems = 0;
+      for(const participant of event.participants) {
+       for(const participantItem of participant.items) {
+        if(participantItem.name === item.name) {
+         totalCountOfOrderedItems += participantItem.quantity;
+        }
+       }
+      }
+      // console.log('Participant item');
+      // console.log(item);
+      // console.log('Group item');
+      // console.log(groupItem);
+      // console.log('Total count of ordered items: ' + totalCountOfOrderedItems);
+      const discount = (item.price/totalCountOfOrderedItems) * item.quantity;
+      totalItemPrice = item.price * item.quantity;
+      // console.log('Begin item price: ' + totalItemPrice);
+      // console.log('Discount: ' + discount);
+      totalItemPrice -= discount;
+      // console.log('Item price with discount: ' + totalItemPrice);
+     } else {
+      // if no coupons, calculate price without discount
+      totalItemPrice += (item.price * item.quantity);
+      // console.log('No coupons for: ' + item.name + '. Price: ' + (item.price * item.quantity));
+     }
+    }
+   }
+   summary += totalItemPrice;
   }
-  return summary;
+  // console.log('Summary: ' + summary)
+  return Math.ceil(summary);
  };
 
- // computes total event sum
- const groupTotal = () => {
+// computes total event sum
+ const discountedGroupTotal = () => {
   let totalSum = 0;
   for(const participant of event.participants) {
-   totalSum += total(participant);
+   totalSum += discountedTotal(participant);
   }
   return totalSum;
  };
 
-// returns collection of all ordered items in event
+ // returns collection of all ordered items in event
  const groupOrderItems = () => {
   let orderItems = [];
   for(const participant of event.participants) {
@@ -296,7 +333,7 @@ const sendEmailNotifications = (groupId) => {
  const sendEmail = (userId, templateToRender, emailData) => {
   const usrEmail = Meteor.users.findOne(userId).services.google.email;
   const subject = templateToRender === 'htmlEmail' ? 'Order details' : 'Group order summary';
-  console.log('Email sended to: ' + usrEmail);
+  console.log(`Email sended to: ${usrEmail}`);
 
   Email.send({
    to: usrEmail,
@@ -310,23 +347,24 @@ const sendEmailNotifications = (groupId) => {
  for(const participant of event.participants) {
   if(participant.inviteStatus === 'confirmed') {
    sendEmail(participant.userId, 'htmlEmail', {
-    total: total(participant),
+    total: discountedTotal(participant),
     orderItems: participant.items,
    });
   }
  }
  // send event summary for group creator
  sendEmail(group.creator, 'htmlGroupCreatorEmail', {
-  groupTotal: groupTotal(),
+  groupTotal: discountedGroupTotal(),
   groupOrderItems: groupOrderItems(),
+  groupItems: group.menuItems,
  });
 };
 
 const removeEvent = (groupId) => {
- const event = Events.findOne({ groupId: groupId });
+ const event = Events.findOne({ groupId });
  if(event.status === 'delivered') {
   Events.remove({_id: event._id});
   // remove old invites too
-  Invites.remove({ groupId: groupId });
+  Invites.remove({ groupId });
  }
 };

@@ -9,9 +9,10 @@ import './menu_add_new_item.js';
 
 Template.menu.helpers({
  menuItems() {
-  const id = FlowRouter.getParam('groupId');
-  if (!Groups.findOne(id)) return;
+  const groupId = FlowRouter.getParam('groupId');
+  const group = Groups.findOne(groupId);
+  if (!group) return;
 
-  return Groups.findOne(id).menuItems;
+  return group.menuItems;
  },
 });

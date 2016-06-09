@@ -20,9 +20,8 @@ Template.eventPage.onCreated(() => {
 
 Template.eventPage.helpers({
  canCreateNewEvent() {
-  // TODO if no event for current group, return true
   const groupId = FlowRouter.getParam('groupId');
-  if(Events.findOne({ groupId: groupId })) {
+  if(Events.findOne({ groupId })) {
    return false;
   } else {
    return true;
@@ -32,7 +31,6 @@ Template.eventPage.helpers({
 
 Template.eventPage.events({
  'click #createEvent'() {
-  // TODO create new event
   const groupId = FlowRouter.getParam('groupId');
   Meteor.call('events.createNew', {
    groupId,

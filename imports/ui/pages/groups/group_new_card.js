@@ -15,14 +15,14 @@ Template.groupNewCard.events({
 
   // check for empty fields
   if(_.isEmpty(groupName) || _.isEmpty(logoUrl)) {
-   Materialize.toast('Fill 2 fields, stupid!', 4000);
+   Materialize.toast('Fill 2 fields, please!', 4000);
    return;
   }
 
  // check if url - image
   imageUrlValidator(logoUrl, (res) => {
    if(res === false) {
-    Materialize.toast('Invalid logo url, try another!', 4000);
+    Materialize.toast('Invalid logo url, try another', 4000);
     return;
    } else {
     evt.target.group_name.value = '';

@@ -3,7 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { Tracker } from 'meteor/tracker';
 
-import '../../ui/stylesheets/style.css';
+import '../../ui/stylesheets/shame.css';
 
 import '../../ui/layouts/master_layout.html';
 import '../../ui/pages/home.html';

@@ -16,7 +16,7 @@ Template.menuAddNewItem.onRendered(() => {
 
 
 Template.menuAddNewItem.events({
-	// TODO: make it using form, catching 'submit'
+	// TODO make it using form, catching 'submit'
  'click #add'() {
   const name = $('#name').val();
   const price = $('#price').val();

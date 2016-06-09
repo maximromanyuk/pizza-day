@@ -22,7 +22,7 @@ image/logo, menu items that can be ordered in this group (made for simplicity, s
 * [OPTIONAL] Ability to add discount coupons for specific menu items.
 
 ***
-[Hosted on Heroku](https://best-pizza-day-ever.herokuapp.com) [still in development]
+[Hosted on Heroku](https://best-pizza-day-ever.herokuapp.com)
 
 ***
 ##How to run
@@ -47,3 +47,21 @@ image/logo, menu items that can be ordered in this group (made for simplicity, s
 * MongoDB
 
 ######All packages you can check [here](https://github.com/CandyOgre/pizza-day/blob/master/.meteor/packages)
+
+***
+##Screenshots
+
+####Groups page
+![Groups page](http://i63.tinypic.com/30wqw5d.png)
+
+####Group page (event not started)
+![Group page. No event](http://i63.tinypic.com/w8m7vl.png)
+
+####Invites page
+![Invites page](http://i68.tinypic.com/wu2i5g.png)
+
+####Event page
+![Event page](http://i68.tinypic.com/dpe3ar.png)
+
+####When remove group
+![Group remove](http://i64.tinypic.com/15yvus8.png)

@@ -6,5 +6,5 @@ import { Events } from '../events.js';
 Meteor.publish('event', (groupId) => {
  check(groupId, String);
 
- return Events.find({ groupId: groupId });
+ return Events.find({ groupId });
 });

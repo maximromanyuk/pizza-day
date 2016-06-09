@@ -83,7 +83,17 @@ Template.groupPage.helpers({
    return false;
   }
  },
+ orderNotEmpty() {
+  const groupId = FlowRouter.getParam('groupId');
+  const event = Events.findOne({ groupId: groupId });
+  if(!event) return;
 
+  const participant = event.participants.find((obj) => {
+   return obj.userId === Meteor.userId();
+  });
+  return participant.items.length !== 0;
+
+ },
 });
 
 Template.groupPage.events({
