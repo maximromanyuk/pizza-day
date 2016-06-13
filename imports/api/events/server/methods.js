@@ -2,12 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
-import { Email } from 'meteor/email';
-import { SSR } from 'meteor/meteorhacks:ssr';
 
 import { Events } from '../events.js';
 import { Groups } from '../../groups/groups.js';
 import { Invites } from '../../invites/invites.js';
+
+import { sendEmailNotifications } from '../../../modules/send_email_notifications.js';
 
 export const createEvent = new ValidatedMethod({
  name: 'events.createNew',
@@ -248,117 +248,6 @@ export const setNewStatus = new ValidatedMethod({
   removeEvent(groupId);
  },
 });
-
-// TODO too big function! Refactor it! NOW!
-const sendEmailNotifications = (groupId) => {
- const group = Groups.findOne(groupId);
- const event = Events.findOne({ groupId });
-
- if(event.status !== 'ordered') return;
- SSR.compileTemplate( 'htmlEmail', Assets.getText( 'html_email.html' ) );
- SSR.compileTemplate( 'htmlGroupCreatorEmail', Assets.getText( 'html_group_creator_email.html' ) );
-
-// computes total sum of participant items
- const discountedTotal = (participant) => {
-  let summary = 0;
-  // each item in order
-  for(const item of participant.items) {
-   let totalItemPrice = 0;
-   // compare with each item in group menu
-   for(const groupItem of group.menuItems) {
-    if(groupItem.name === item.name) {
-     // where find coupons
-     if(groupItem.coupons !== 0) {
-      // and count a total of all ordered items with this name,
-      // for counting discount
-      let totalCountOfOrderedItems = 0;
-      for(const participant of event.participants) {
-       for(const participantItem of participant.items) {
-        if(participantItem.name === item.name) {
-         totalCountOfOrderedItems += participantItem.quantity;
-        }
-       }
-      }
-      // console.log('Participant item');
-      // console.log(item);
-      // console.log('Group item');
-      // console.log(groupItem);
-      // console.log('Total count of ordered items: ' + totalCountOfOrderedItems);
-      const discount = (item.price/totalCountOfOrderedItems) * item.quantity;
-      totalItemPrice = item.price * item.quantity;
-      // console.log('Begin item price: ' + totalItemPrice);
-      // console.log('Discount: ' + discount);
-      totalItemPrice -= discount;
-      // console.log('Item price with discount: ' + totalItemPrice);
-     } else {
-      // if no coupons, calculate price without discount
-      totalItemPrice += (item.price * item.quantity);
-      // console.log('No coupons for: ' + item.name + '. Price: ' + (item.price * item.quantity));
-     }
-    }
-   }
-   summary += totalItemPrice;
-  }
-  // console.log('Summary: ' + summary)
-  return Math.ceil(summary);
- };
-
-// computes total event sum
- const discountedGroupTotal = () => {
-  let totalSum = 0;
-  for(const participant of event.participants) {
-   totalSum += discountedTotal(participant);
-  }
-  return totalSum;
- };
-
- // returns collection of all ordered items in event
- const groupOrderItems = () => {
-  let orderItems = [];
-  for(const participant of event.participants) {
-   for(const item of participant.items) {
-    const index = orderItems.findIndex((obj) => {
-     if (obj.name === item.name) { return true; }
-    });
-    if( index !== -1 ) {
-     orderItems[index].quantity += item.quantity;
-    } else {
-     orderItems.push(item);
-    }
-   }
-  }
-  return orderItems;
- };
-
- const sendEmail = (userId, templateToRender, emailData) => {
-  const usrEmail = Meteor.users.findOne(userId).services.google.email;
-  const subject = templateToRender === 'htmlEmail' ? 'Order details' : 'Group order summary';
-  console.log(`Email sended to: ${usrEmail}`);
-
-  Email.send({
-   to: usrEmail,
-   from: 'Pizza Day app <pizzadayever@gmail.com>',
-   subject,
-   html: SSR.render( templateToRender, emailData ),
-  });
- };
-
- // send order summary for each participant
- for(const participant of event.participants) {
-  if(participant.inviteStatus === 'confirmed') {
-   sendEmail(participant.userId, 'htmlEmail', {
-    total: discountedTotal(participant),
-    orderItems: participant.items,
-   });
-  }
- }
- // send event summary for group creator
- sendEmail(group.creator, 'htmlGroupCreatorEmail', {
-  groupTotal: discountedGroupTotal(),
-  groupOrderItems: groupOrderItems(),
-  groupItems: group.menuItems,
- });
-};
 
 const removeEvent = (groupId) => {
  const event = Events.findOne({ groupId });

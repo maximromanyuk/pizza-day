@@ -9,8 +9,7 @@ import './menu_add_new_item.js';
 
 Template.menu.helpers({
  menuItems() {
-  const groupId = FlowRouter.getParam('groupId');
-  const group = Groups.findOne(groupId);
+  const group = Groups.findOne(FlowRouter.getParam('groupId'));
   if (!group) return;
 
   return group.menuItems;

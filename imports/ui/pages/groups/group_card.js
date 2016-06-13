@@ -9,8 +9,7 @@ import './group_card.css';
 Template.groupCard.helpers({
  participant() {
   const groupParticipants = Groups.findOne(this._id).users;
-  const currentUser = Meteor.userId();
 
-  return groupParticipants.indexOf(currentUser) > -1;
+  return groupParticipants.indexOf(Meteor.userId()) > -1;
  },
 });

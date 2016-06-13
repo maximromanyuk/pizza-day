@@ -41,17 +41,9 @@ Template.usersStatusesList.helpers({
 
 Template.userStatus.helpers({
  confirmed() {
-  if(this.status === 'confirmed') {
-   return true;
-  } else {
-   return false;
-  }
+  return this.status === 'confirmed';
  },
  discarded() {
-  if(this.status === 'discarded') {
-   return true;
-  } else {
-   return false;
-  }
+  return this.status === 'discarded';
  },
 });

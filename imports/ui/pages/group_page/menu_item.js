@@ -13,20 +13,18 @@ Template.menuItem.onRendered(() => {
 
 Template.menuItem.helpers({
  canAddToOrder() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
 
-  if(event.status === 'ordering' &&
-     participant.inviteStatus === 'confirmed') {
-   return true;
-  } else {
-   return false;
-  }
+  return (event.status === 'ordering' &&
+         participant.inviteStatus === 'confirmed' &&
+         participant.orderConfirmed !== true);
  },
 
  hasGroupCreatorRights() {
@@ -48,8 +46,9 @@ Template.menuItem.helpers({
 
 Template.menuItem.events({
  'click #addToOrder'() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   Meteor.call('events.addItemToOrder', {

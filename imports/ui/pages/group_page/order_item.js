@@ -7,27 +7,25 @@ import './order_item.html';
 
 Template.orderItem.helpers({
  canChangeQuantity() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
 
-  if(event.status === 'ordering' &&
-     participant.orderConfirmed !== true) {
-   return true;
-  } else {
-   return false;
-  }
+  return event.status === 'ordering' &&
+         participant.orderConfirmed !== true;
  },
 });
 
 Template.orderItem.events({
  'click #addOne'() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   Meteor.call('events.addItemToOrder', {
@@ -41,9 +39,11 @@ Template.orderItem.events({
    }
   });
  },
+
  'click #removeOne'() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   Meteor.call('events.addItemToOrder', {

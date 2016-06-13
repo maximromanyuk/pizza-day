@@ -8,8 +8,9 @@ import './order_item.js';
 
 Template.orderList.helpers({
  orderItems() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
 
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
@@ -19,36 +20,30 @@ Template.orderList.helpers({
  },
 
  ordering() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
 
-  if(event.status === 'ordering' &&
-     participant.inviteStatus === 'confirmed' &&
-     participant.orderConfirmed !== true) {
-   return true;
-  } else {
-   return false;
-  }
+  return event.status === 'ordering' &&
+         participant.inviteStatus === 'confirmed' &&
+         participant.orderConfirmed !== true;
  },
  notEmpty() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
 
-  if(participant.items.length !== 0) {
-   return true;
-  } else {
-   return false;
-  }
+  return participant.items.length !== 0;
  },
 });
 
@@ -71,8 +66,9 @@ Template.orderList.events({
  },
 
  'click #declineParticipation'() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   Meteor.call('events.updateParticipantStatus', {

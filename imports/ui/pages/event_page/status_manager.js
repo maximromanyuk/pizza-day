@@ -8,8 +8,9 @@ import { Events } from '../../../api/events/events.js';
 import './status_manager.html';
 
 Template.statusManager.onRendered(() => {
- const groupId = FlowRouter.getParam('groupId');
- const event = Events.findOne({ groupId });
+ const event = Events.findOne({
+  groupId: FlowRouter.getParam('groupId'),
+ });
 
  // initialize datepicker
  const $dateInput = $('.datepicker').pickadate({
@@ -33,8 +34,9 @@ Template.statusManager.onRendered(() => {
 
 Template.statusManager.helpers({
  status() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   return event.status;

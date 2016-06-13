@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Materialize } from 'meteor/materialize:materialize';
 
-import { imageUrlValidator } from '../../../modules/imageUrlValidator.js';
+import { imageUrlValidator } from '../../../modules/image_url_validator.js';
 
 import './group_new_card.html';
 import './group_new_card.css';

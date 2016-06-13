@@ -40,19 +40,17 @@ Template.groupPage.helpers({
  },
 
  status() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
 
-  if(event === undefined) {
-   return 'no active event';
-  } else {
-   return event.status;
-  }
+  return event === undefined ? 'no active event' : event.status;
  },
 
  date() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if (!event) return;
 
   return moment(event.date).format('D MMM, YYYY');
@@ -66,26 +64,24 @@ Template.groupPage.helpers({
  },
 
  participatesInEvent() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {
    return obj.userId === Meteor.userId();
   });
 
-  if((event.status === 'ordering' ||
-     event.status === 'ordered'   ||
-     event.status ===  'delivering') &&
-     participant.inviteStatus === 'confirmed') {
-   return true;
-  } else {
-   return false;
-  }
+  return (event.status === 'ordering' ||
+          event.status === 'ordered'  ||
+          event.status ===  'delivering') &&
+         participant.inviteStatus === 'confirmed';
  },
  orderNotEmpty() {
-  const groupId = FlowRouter.getParam('groupId');
-  const event = Events.findOne({ groupId: groupId });
+  const event = Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
   if(!event) return;
 
   const participant = event.participants.find((obj) => {

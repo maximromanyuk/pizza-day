@@ -20,12 +20,9 @@ Template.eventPage.onCreated(() => {
 
 Template.eventPage.helpers({
  canCreateNewEvent() {
-  const groupId = FlowRouter.getParam('groupId');
-  if(Events.findOne({ groupId })) {
-   return false;
-  } else {
-   return true;
-  }
+  return !Events.findOne({
+   groupId: FlowRouter.getParam('groupId'),
+  });
  },
 });
 
