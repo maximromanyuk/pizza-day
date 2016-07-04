@@ -1,4 +1,6 @@
 #[JSSolutions](http://jssolutionsdev.com/ "JSSolutions Homepage") Final Test :pray:
+
+[![Join the chat at https://gitter.im/CandyOgre/pizza-day](https://badges.gitter.im/CandyOgre/pizza-day.svg)](https://gitter.im/CandyOgre/pizza-day?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 You are software engineer in small development company. Every Wednesday your teammates order pizza delivery in Local Restaurant. Usually there is about 10-15 order items (pizzas, juice
 etc.) per order. Also, Local Restaurant provides discount coupons if pizza delivery guy was late.
 ##The Problem
