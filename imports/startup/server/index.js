@@ -1,3 +1,6 @@
-import './register-api.js';
+import './mail-configuration.js';
+import './service-configuration.js';
 
-import './environment_variables.js';
+// This defines all the collections, publications and methods
+// that the application provides as an API to the client.
+import './register-api.js';
